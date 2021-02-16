@@ -60,6 +60,7 @@ Rails.application.routes.draw do
   end
   scope module: :customer do
     root to: 'homes#top'
+    get 'home/about' => 'homes#about'
   end
 
 end
