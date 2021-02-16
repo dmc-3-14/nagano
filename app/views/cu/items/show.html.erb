@@ -1,0 +1,8 @@
+カスタマー
+<%= attachment_image_tag @item, :image %>
+<p><strong><%= @item.title %></strong></p>
+<p><%= @item.body %></p>
+<br>
+<p>¥<%= @item.non_tax_price %></p>
+
+<%= button_to "カートに入れる", { cart_items_path }, { method: :post }, class: "btn btn-success" %>
