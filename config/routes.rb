@@ -1,47 +1,58 @@
 Rails.application.routes.draw do
 
-  scope module: :customer do
-    get 'shippings/edit'
-    get 'shippings/index'
-  end
-  scope module: :customer do
-    get 'cart_items/index'
-  end
   namespace :admin do
-    get 'genres/index'
-    get 'genres/edit'
+    resources :customers, only: [ :index, :show, :edit, :update]
+  end
+
+  scope module: :customer do
+    resources :customers, only: [ :show, :edit, :update] do
+      member do
+        patch 'stateupdate'
+        get 'exit'
+      end
+    end
+  end
+
+
+  namespace :admin do
+    resources :genres, only: [:create, :index, :edit, :update]
   end
   scope module: :customer do
-    get 'items/show'
-    get 'items/index'
+    resources :items, only: [:show, :index]
   end
+
   namespace :admin do
-    get 'items/index'
-    get 'items/show'
-    get 'items/new'
-    get 'items/edit'
+    resources :items, only: [ :index, :show, :new, :create, :edit, :update]
   end
+
   scope module: :customer do
-    get 'orders/show'
-    get 'orders/index'
-    get 'orders/put'
-    get 'orders/confirm'
-    get 'orders/complete'
+    resources :orders, only: [ :index, :show, :create] do
+      member do
+        get 'put'
+        get 'confirm'
+        get 'complete'
+     end
+    end
   end
+
   namespace :admin do
-    get 'orders/index'
-    get 'orders/show'
+    resources :orders, only: [ :index, :show, :update]
   end
+
+  namespace :admin do
+    resources :orderd_items, only: [:update]
+  end
+
   scope module: :customer do
-    get 'customers/show'
-    get 'customers/edit'
-    get 'customers/exit'
+    resources :cart_items, only: [:index, :create, :destroy, :update] do
+      member do
+        delete 'alldestroy'
+      end
+    end
   end
-  namespace :admin do
-    get 'customers/index'
-    get 'customers/show'
-    get 'customers/edit'
-    get 'customers/update'
+
+  scope module: :customer do
+    resources :shippings, only: [:create, :destroy, :edit, :update, :index]
   end
 
   devise_for :admins, controllers: {
