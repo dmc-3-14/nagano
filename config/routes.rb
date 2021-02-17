@@ -1,8 +1,21 @@
 Rails.application.routes.draw do
 
+    devise_for :admins, controllers: {
+    sessions:      'admins/sessions',
+    passwords:     'admins/passwords',
+    registrations: 'admins/registrations'
+  }
+  devise_for :customers, controllers: {
+    sessions:      'customers/sessions',
+    passwords:     'customers/passwords',
+    registrations: 'customers/registrations'
+  }
+
   namespace :admin do
     resources :customers, only: [ :index, :show, :edit, :update]
   end
+  
+  
 
   scope module: :customer do
     resources :customers, only: [ :show, :edit, :update] do
@@ -55,16 +68,7 @@ Rails.application.routes.draw do
     resources :shippings, only: [:create, :destroy, :edit, :update, :index]
   end
 
-  devise_for :admins, controllers: {
-    sessions:      'admins/sessions',
-    passwords:     'admins/passwords',
-    registrations: 'admins/registrations'
-  }
-  devise_for :customers, controllers: {
-    sessions:      'customers/sessions',
-    passwords:     'customers/passwords',
-    registrations: 'customers/registrations'
-  }
+
 
   namespace :admin do
     root to: 'homes#top'
