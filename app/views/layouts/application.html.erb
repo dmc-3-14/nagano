@@ -9,6 +9,12 @@
   </head>
 
   <body>
+    <%= render 'layouts/header' %>
+
+    <% if flash[:notice] %>
+       <h3 class="flash-green"><%= flash[:notice] %></h3>
+　　<% end %>
+
     <%= yield %>
   </body>
 </html>
