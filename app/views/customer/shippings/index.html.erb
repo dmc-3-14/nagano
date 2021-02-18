@@ -19,7 +19,7 @@
   </tr>
   <tr>
     <td>宛名</td>
-    <td></td>
+    <td><%= f.text_field :name %></td>
     <td><%= f.submit '新規登録' %></td>
   </tr>
   <% end %>
@@ -37,9 +37,9 @@
   <tbody>
     <% @shippings.each do |shipping| %>
     <tr>
+      <td><%= shipping.post_code %></td>
       <td><%= shipping.address %></td>
       <td><%= shipping.name %></td>
-      <td>ssss</td>
     </tr>
   <% end %>
   </tbody>

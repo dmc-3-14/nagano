@@ -2,14 +2,20 @@ class Customer::ShippingsController < ApplicationController
 
 
   def create
-    shipping = Shipping.new(shipping_params)
-    shipping.save
-    redirect_to shippings_path
+    @shippings = Shipping.all
+    @shipping = Shipping.new(shipping_params)
+    @shipping.customer_id = current_customer.id
+    if @shipping.save
+      flash[:notice] = "Genre was successfully created"
+      redirect_to shippings_path
+    else
+      render 'index'
+    end
   end
 
   def index
     @shippings = Shipping.all
-    @shipping = current_customer
+    @shipping = Shipping.new
   end
 
   def edit
@@ -25,7 +31,7 @@ class Customer::ShippingsController < ApplicationController
 
   private
   def shipping_params
-    params.permit(:post_code, :address, :name)
+    params.require(:shipping).permit(:post_code, :address, :name)
   end
 
 end
