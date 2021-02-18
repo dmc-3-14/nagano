@@ -1,6 +1,6 @@
 <h1>商品詳細</h1>
 <table>
-  <tr><%= attachment_image_tag @item, :image %></tr>
+  <tr><%= attachment_image_tag @item, :image, :fill, 200, 150, fallback: "no_image.jpg", size:'200x150' %></tr>
   <tr>
     <th>商品名</th>
     <th><%= @item.title %></th>
@@ -11,7 +11,8 @@
   </tr>
   <tr>
     <th>ジャンル</th>
-    <th><%= @item.genres %></th>
+    <!--@item.genre.nameを追加-->
+    <th></th>
   </tr>
   <tr>
     <th>税込価格<br>(税抜価格)</th>
@@ -19,6 +20,14 @@
   </tr>
   <tr>
     <th>販売ステータス</th>
-    <th><%= @item.sale_state %></th>
+    <% if @item.sale_state %>
+    <th>販売中</th>
+    <% else %>
+    <th>販売停止中</th>
+    <% end %>
   </tr>
 </table>
+
+<%= link_to "編集する", edit_admin_item_path(@item), class: 'btn btn-success' %>
+
+
