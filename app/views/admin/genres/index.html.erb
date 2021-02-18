@@ -1,18 +1,37 @@
-<h1>ジャンル一覧・追加</h1>
-<%= form_with model: @genre, local:true do |f| %>
-  <h4>ジャンル名</h4>
-  <%= f.text_field :name %>
-  <%= f.submit '新規登録', class: 'btn btn-success' %>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="mx-auto">
 
-<table>
-  <th>ジャンル</th>
-  <% @genres.each do |genre| %>
-  <th>
-    <tr><%= genre.name %></tr>
-  </th>
-  <th>
-    <tr><%= link_to '編集する', edit_ , class: "btn btn-success" %></tr>
-  </th>
-  <% end %>
-</table>
+      <br>
+      <h1>ジャンル一覧・追加</h1>
+      <%= render 'layouts/errors', obj: @genre %>
+      <%= form_for @genre, :url => {action:"create"} do |f| %>
+        <br>
+        <h4>ジャンル名</h4>
+        <%= f.text_field :name %>
+        <%= f.submit '新規登録', class: 'btn btn-success' %>
+      <% end %>
+
+
+      <% if @genres.exists? %>
+        <table>
+
+          <th>ジャンル</th>
+          <% @genres.each do |genre| %>
+            <br>
+            <tr>
+              <td><%= genre.name %></td>
+              <td><%= link_to '編集する', edit_admin_genre_path(genre) , class: "btn btn-success" %></td>
+            </tr>
+            <% end %>
+        </table>
+      <% else %>
+        <br><br>
+        <h4>まだジャンルが追加されていません。</h4>
+      <% end %>
+
+
+
+    </div>
+  </div>
+</div>
