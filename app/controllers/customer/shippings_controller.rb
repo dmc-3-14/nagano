@@ -19,14 +19,23 @@ class Customer::ShippingsController < ApplicationController
   end
 
   def edit
+    @shipping = Shipping.find(params[:id])
   end
 
   def update
-
+    shipping = Shipping.find(params[:id])
+    if shipping.update(shipping_params)
+      flash[:notice] = "You have updated user successfully."
+      redirect_to customers_path
+    else
+      render 'index'
+    end
   end
 
   def destroy
-
+    shipping = Shipping.find(params[:id])
+    shipping.destroy
+    redirect_to shippings_path
   end
 
   private
