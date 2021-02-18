@@ -8,7 +8,7 @@
   <% end %>
 
 <teble class="table">
-  <%= form_for @shipping, :url => {action:"create"}  do |f| %>
+  <%= form_for @shipping, :url => {action:"create"} do |f| %>
   <tr>
     <td>郵便番号(ハイフンなし)</td>
     <td><%= f.text_field :post_code %></td>
