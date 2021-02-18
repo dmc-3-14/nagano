@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  devise_for :admins, controllers: {
+    devise_for :admins, controllers: {
     sessions:      'admins/sessions',
     passwords:     'admins/passwords',
     registrations: 'admins/registrations'
@@ -12,16 +12,10 @@ Rails.application.routes.draw do
   }
 
   namespace :admin do
-    root to: 'homes#top'
-  end
-  scope module: :customer do
-    root to: 'homes#top'
-    get 'home/about' => 'homes#about'
-  end
-
-  namespace :admin do
     resources :customers, only: [ :index, :show, :edit, :update]
   end
+  
+  
 
   scope module: :customer do
     resource :customers, only: [ :show, :edit, :update] do
@@ -72,6 +66,16 @@ Rails.application.routes.draw do
 
   scope module: :customer do
     resources :shippings, only: [:create, :destroy, :edit, :update, :index]
+  end
+
+
+
+  namespace :admin do
+    root to: 'homes#top'
+  end
+  scope module: :customer do
+    root to: 'homes#top'
+    get 'home/about' => 'homes#about'
   end
 
 end

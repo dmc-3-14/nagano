@@ -1,2 +1,55 @@
-<h1>Admin::Customers#edit</h1>
-<p>Find me in app/views/admin/customers/edit.html.erb</p>
+<h2><%= @customer.first_name %>さんの会員詳細</h2>
+<table>
+  <thead>
+    <tr>
+      <th>会員ID</th>
+      <th><%= @customer.id %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= form_for @customer, url:"/admin/customers/#{@customer.id}" do |f| %>
+    <tr>
+      <td>氏名</td>
+      <td><%= f.text_field :last_name %></td>
+      <td><%= f.text_field :first_name %></td>
+    </tr>
+     <tr>
+      <td>フリガナ</td>
+      <td><%= f.text_field :kana_last_name %></td>
+      <td><%= f.text_field :kana_first_name %></td>
+    </tr>
+        <tr>
+      <td>郵便番号</td>
+      <td><%= f.text_field :post_code %></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>住所</td>
+      <td><%= f.text_field :address %></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>電話番号</td>
+      <td><%= f.text_field :telephone_number %></td>
+      <td></td>
+    </tr>
+      <tr>
+      <td>メールアドレス</td>
+      <td><%= f.text_field :email %></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>会員ステータス</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><%= f.submit "変更を保存" %></td>
+      <td></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
