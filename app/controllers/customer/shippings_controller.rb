@@ -6,7 +6,7 @@ class Customer::ShippingsController < ApplicationController
     @shipping = Shipping.new(shipping_params)
     @shipping.customer_id = current_customer.id
     if @shipping.save
-      flash[:notice] = "Genre was successfully created"
+      flash[:notice] = "Shipping was successfully created"
       redirect_to shippings_path
     else
       render 'index'
