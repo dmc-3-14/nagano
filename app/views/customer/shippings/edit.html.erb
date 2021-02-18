@@ -1,4 +1,5 @@
 <h3>配送先編集</h3>
+<%= render 'layouts/errors', obj: @shipping %>
 <teble class="table">
   <%= form_for @shipping, url:"/shippings/#{@shipping.id}" do |f| %>
   <tr>
