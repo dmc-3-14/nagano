@@ -1,42 +1,42 @@
 <!--admin-customers-show 顧客詳細画面を表示するため -->
 
-<h2><!-- %= customer.name % --></h2><!-- フルネームのインスタンス変数入れた方がいいかも。 -->
+<h2><%= @customer.first_name %>さんの会員詳細</h2><!-- フルネームのインスタンス変数入れた方がいいかも。 -->
 <table>
 <tbody>
 <tr>
   <td>会員ID</td>
-  <td></td>
+  <td><%= @customer.id %></td>
 </tr>
 <tr>
   <td>氏名</td>
-  <td><%= customer.first_name %></td>
+  <td><%= @customer.first_name %></td>
 </tr>
 <tr>
   <td>フリガナ</td>
-  <td></td>
+  <td><%= @customer.kana_first_name %></td>
 </tr>
 <tr>
   <td>郵便番号</td>
-  <td></td>
+  <td><%= @customer.post_code %></td>
 </tr>
 <tr>
   <td>住所</td>
-  <td></td>
+  <td><%= @customer.address %></td>
 </tr>
 <tr>
   <td>電話番号</td>
-  <td></td>
+  <td><%= @customer.telephone_number %></td>
 </tr>
 <tr>
   <td>メールアドレス</td>
-  <td><!-- %= customer.email % --></td>
+  <td><%= @customer.email %></td>
 </tr>
   <td>会員ステータス</td>
-  <td><!-- %= customer.member_state % --></td>
+  <td><%= @customer.member_state %></td>
 </tr>
 <tr>
   <td></td>
-  <td><%= link_to "編集する", "/", class: "btn btn-success" %></td>
+  <td><%= link_to "編集する", edit_admin_customer_path(@customer.id), class: "btn btn-success" %></td>
   <td><%= link_to "注文履歴一覧を見る", "/", class: "btn btn-success" %></td>
 </tr>
 </tbody>

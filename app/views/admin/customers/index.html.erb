@@ -10,10 +10,12 @@
 </tr>
 </thead>
 <tbody>
-<tr><% customers.each do |customer| %>
-<td><%=　link_to customer.first_name customer.last_name ,会員詳細 %></td>
+<tr><% @customers.each do |customer| %>
+<td><%=  customer.id %></td>
+<td><%= link_to customer.first_name, admin_customer_path(customer.id) %></td><!-- フルネーム表示がしたい -->
 <td><%= customer.email %></td>
-<td><%= customer.member_state %-></td>
+<td><%= customer.member_state %></td>
+<% end %>
 </tr>
 <tr>
 <td></td>
