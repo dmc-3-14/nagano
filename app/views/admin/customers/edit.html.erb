@@ -1,6 +1,4 @@
 <h2><%= @customer.first_name %>さんの会員詳細</h2>
-
-
 <table>
   <thead>
     <tr>
@@ -10,7 +8,7 @@
     </tr>
   </thead>
   <tbody>
-    <%= form_for @customer, :url => {action:"edit"} do |f| %>
+    <%= form_for @customer, url:"/admin/customers/#{@customer.id}" do |f| %>
     <tr>
       <td>氏名</td>
       <td><%= f.text_field :last_name %></td>
