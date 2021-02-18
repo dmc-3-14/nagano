@@ -10,10 +10,10 @@
 </tr>
 </thead>
 <tbody>
-<tr><!-- % customers.each do |customer| % -->
-<td><!-- %=　link_to customer.first_name customer.last_name ,会員詳細 %  --></td>
-<td><!-- %= customer.email % --></td>
-<td><!-- %= customer.member_state % --></td>
+<tr><% customers.each do |customer| %>
+<td><%=　link_to customer.first_name customer.last_name ,会員詳細 %></td>
+<td><%= customer.email %></td>
+<td><%= customer.member_state %-></td>
 </tr>
 <tr>
 <td></td>
