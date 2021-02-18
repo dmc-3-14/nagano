@@ -17,25 +17,29 @@ class Customer::CustomersController < ApplicationController
     end
   end
 
-  def exit
+   def exit
     @customer = current_customer
   end
-
-  def stateupdate
-     @customer = Customer.find(current_customer.id)
-    #現在ログインしているユーザーを@userに格納
-    @customer.update(is_active: "Invalid")
-    #updateで登録情報をInvalidに変更
+  
+  def hide
+    @customer = current_customer
+    #is_deletedカラムにフラグを立てる(defaultはfalse)
+    @customer.update(is_deleted: true)
+    #ログアウトさせる
     reset_session
-    #sessionIDのresetを行う
+    flash[:notice] = "ありがとうございました。またのご利用を心よりお待ちしております。"
     redirect_to root_path
-    #指定されたrootへのpath
+  end
+
+  
+  def active_for_authentication?
+    super && (self.is_deleted == false)
   end
 
   private
 
 def customer_params
-    params.require(:customer).permit(:active)
+    params.require(:customer).permit(:last_name,:first_name, :kana_last_name, :kana_first_name, :post_code, :address, :telephone_number,:telephone_number, :email)
 end
 
 end
