@@ -31,13 +31,18 @@
   <td>メールアドレス</td>
   <td><%= @customer.email %></td>
 </tr>
+<tr>
   <td>会員ステータス</td>
-  <td><%= @customer.member_state %></td>
+  <% if @customer.member_state %>
+    <td>退会</td>
+  <% else %>
+    <td>有効</td>
+  <% end %>
 </tr>
 <tr>
   <td></td>
   <td><%= link_to "編集する", edit_admin_customer_path(@customer.id), class: "btn btn-success" %></td>
-  <td><%= link_to "注文履歴一覧を見る", "/", class: "btn btn-success" %></td>
+  <td><%= link_to "注文履歴一覧を見る", admin_order_path(@customer.id), class: "btn btn-success" %></td>
 </tr>
 </tbody>
 </table>
