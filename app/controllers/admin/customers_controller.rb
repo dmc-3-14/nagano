@@ -14,11 +14,17 @@ class Admin::CustomersController < ApplicationController
   def update
    @customer = Customer.find(params[:id])
    if @customer.update(customer_params)
-    lash[:notice] = "You have updated book successfully."
-    redirect_to admin_customer_path(customer.id)
+    flash[:notice] = "You have updated book successfully."
+    redirect_to admin_customer_path(@customer.id)
    else
      render :edit
     end
+  end
+  
+    private
+  
+  def customer_params
+    params.require(:customer).permit(:last_name,:first_name, :kana_last_name, :kana_first_name, :post_code, :address, :telephone_number,:telephone_number, :email)
   end
 
 end

@@ -41,7 +41,9 @@
     </tr>
     <tr>
       <td>会員ステータス</td>
-      <td></td>
+      <td><%= f.radio_button :member_state, checked: true %>
+          <%= f.radio_button :member_state, checked: false %>
+      </td>
       <td></td>
     </tr>
     <tr>

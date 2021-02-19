@@ -14,14 +14,15 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :customers, only: [ :index, :show, :edit, :update]
   end
-  
-  
+
+
 
   scope module: :customer do
     resource :customers, only: [ :show, :edit, :update] do
       member do
         patch 'stateupdate'
         get 'exit'
+        put "/customers/:id/hide" => "customers#hide", as: 'customers_hide'
       end
     end
   end

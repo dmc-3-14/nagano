@@ -1,27 +1,28 @@
 <!--admin-customers-index 顧客一覧画面を表示するため -->
 <h2>会員一覧</h2>
 <table>
-<thead>
-<tr>
-<th>会員ID</th>
-<th>氏名</th>
-<th>メールアドレス</th>
-<th>ステータス</th>
-</tr>
-</thead>
-<tbody>
-<tr><% @customers.each do |customer| %>
-<td><%=  customer.id %></td>
-<td><%= link_to customer.first_name, admin_customer_path(customer.id) %></td><!-- フルネーム表示がしたい -->
-<td><%= customer.email %></td>
-<td><%= customer.member_state %></td>
-<% end %>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-</tbody>
+    <thead>
+        <tr>
+            <th>会員ID</th>
+            <th>氏名</th>
+            <th>メールアドレス</th>
+            <th>ステータス</th>
+        </tr>
+    </thead>
+    <tbody>
+    <% @customers.each do |customer| %>
+        <tr>
+            <td><%=  customer.id %></td>
+            <td><%= link_to customer.first_name, admin_customer_path(customer.id) %></td><!-- フルネーム表示がしたい -->
+            <td><%= customer.email %></td>
+              <% if customer.member_state %>
+                <td>退会</td>
+              <% else %>
+                <td>有効</td>
+              <% end %>
+        </tr>
+    <% end %>
+    </tbody>
 </table>
 
 <!--kaminari入れてページ数表示？ -->
