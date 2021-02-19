@@ -17,7 +17,7 @@ class Customer::CustomersController < ApplicationController
     end
   end
 
-   def exit
+  def exit
     @customer = current_customer
   end
   
