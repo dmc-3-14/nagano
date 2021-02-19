@@ -1,8 +1,9 @@
 class Admin::ItemsController < ApplicationController
-# before_action :authenticate_user!を追加
+before_action :authenticate_admin!
 
   def index
     @items = Item.all
+    @item = Item.new
   end
 
   def show
