@@ -15,7 +15,11 @@
             <td><%=  customer.id %></td>
             <td><%= link_to customer.first_name, admin_customer_path(customer.id) %></td><!-- フルネーム表示がしたい -->
             <td><%= customer.email %></td>
-            <td><%= customer.member_state %></td>
+              <% if customer.member_state %>
+                <td>退会</td>
+              <% else %>
+                <td>有効</td>
+              <% end %>
         </tr>
     <% end %>
     </tbody>

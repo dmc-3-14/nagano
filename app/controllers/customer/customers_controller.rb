@@ -23,8 +23,8 @@ class Customer::CustomersController < ApplicationController
   
   def hide
     @customer = current_customer
-    #is_deletedカラムにフラグを立てる(defaultはfalse)
-    @customer.update(is_deleted: true)
+    #member_stateカラムにフラグを立てる(defaultはfalse)
+    @customer.update(member_state: true)
     #ログアウトさせる
     reset_session
     flash[:notice] = "ありがとうございました。またのご利用を心よりお待ちしております。"
@@ -33,7 +33,7 @@ class Customer::CustomersController < ApplicationController
 
   
   def active_for_authentication?
-    super && (self.is_deleted == false)
+    super && (self.member_state == false)
   end
 
   private
