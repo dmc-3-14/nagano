@@ -26,4 +26,8 @@ class Customer < ApplicationRecord
     result
   end
 
+  def active_for_authentication?
+    super && (self.member_state == false)
+  end
+
 end

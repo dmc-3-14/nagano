@@ -1,4 +1,6 @@
 class Customer::CustomersController < ApplicationController
+
+
   def show
     @customer = current_customer
   end
@@ -20,7 +22,7 @@ class Customer::CustomersController < ApplicationController
   def exit
     @customer = current_customer
   end
-  
+
   def hide
     @customer = current_customer
     #member_stateカラムにフラグを立てる(defaultはfalse)
@@ -31,7 +33,7 @@ class Customer::CustomersController < ApplicationController
     redirect_to root_path
   end
 
-  
+
   def active_for_authentication?
     super && (self.member_state == false)
   end
