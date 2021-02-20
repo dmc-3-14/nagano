@@ -15,7 +15,7 @@ class Customer::CustomersController < ApplicationController
      flash[:notice] = "You have updated user successfully."
      redirect_to customers_path
     else
-     render("customer/edit")
+     render :edit
     end
   end
 

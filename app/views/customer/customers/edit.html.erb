@@ -6,7 +6,7 @@
 <table class="col-sm-12 col-md-8 col-lg-8 my-4">
 <tbody>
    <%= form_for @customer, url: "/customers" do |f| %>
-    <%= flash[:error] %>
+  <%= render 'layouts/errors', obj: @customer %>
     <tr>
      <td style="width:20%" height="40"> <label>氏名</label></td>
       <td style="width:30%"><%= f.text_field :last_name %></td>
