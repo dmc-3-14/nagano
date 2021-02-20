@@ -2,14 +2,18 @@ class Customer::CartItemsController < ApplicationController
   before_action :authenticate_customer!
   
   def index
-    @cart_items = CartItem.all
+    @cart_items = current_customer.cart_items
   end
   
   def create
     @cart_item = CartItem.new(cart_item_params)
     @cart_item.customer_id = current_customer.id
-    @cart_item.save
-    redirect_to cart_items_path
+    if @cart_item.save
+     redirect_to cart_items_path
+    else
+     redirect_back(fallback_location: root_path)
+    end
+  
   end
  
   def update
