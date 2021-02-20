@@ -1,1 +1,56 @@
-  <!-- deviceのeditが出るから使わない -->
+<div class="container m-5">
+  <div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-1"></div>
+      <h4 class="my-4"><span style="background-color:#EFEFEF">　会員情報編集　</span></h4>
+    </div>
+<table class="col-sm-12 col-md-8 col-lg-8 my-4">
+<tbody>
+   <%= form_for @customer, url: "/customers" do |f| %>
+    <%= flash[:error] %>
+    <tr>
+     <td style="width:20%" height="40"> <label>氏名</label></td>
+      <td style="width:30%"><%= f.text_field :last_name %></td>
+      <td style="width:30%"><%= f.text_field :first_name %></td>
+      <td style="width:20%"></td>
+    </tr>
+    <tr>
+      <td height="40"><label>フリガナ</label></td>
+      <td><%= f.text_field :kana_last_name %></td>
+      <td><%= f.text_field :kana_first_name %></td>
+      <td></td>
+    </tr>
+    <tr>
+    <td height="40"><label>郵便番号</label></td>
+      <td><%= f.text_field :post_code %></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+    <td height="40"><label>住所</label></td>
+      <td colspan="3"><%= f.text_field :address %></td>
+    </tr>
+    <tr>
+    <td height="40"><label>電話番号</label></td>
+      <td><%= f.text_field :telephone_number %></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+    <td height="40"><label>メールアドレス</label></td>
+      <td><%= f.text_field :email %></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td height="50"></td>
+    <td><%= f.submit "編集内容を保存", class: "btn btn-success" %></td>
+    <% end %>
+    <td></td>
+     <td><%= link_to "退会する", exit_customers_path, class: "btn btn-danger" %></td>
+    </tr>
+       </tbody>
+</table>
+   </div>
+ </div>
+</div>
+</div>
