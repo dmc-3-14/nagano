@@ -35,3 +35,35 @@ a {
 .header-name {
   color: #00ff00
 }
+
+.top-margin {
+  height: 20px;
+  width: 100%;
+}
+
+.item-box {
+  margin-right: 10px;
+}
+
+.item-box:last-child {
+  margin-right: 0px;
+}
+
+.main-visual {
+  height: 450px;
+  width: 100%;
+  background: image-url('main-visual.jpg');
+  background-size: cover;
+  display: flex;
+  align-items: center;
+}
+
+.main-visual p {
+  margin: auto;
+  padding: 30px;
+  background-color: rgba(255,255,255,0.8);
+}
+
+.new-item {
+  margin: 20px 0px;
+}
