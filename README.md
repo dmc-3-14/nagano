@@ -4,4 +4,5 @@
 * 新規登録、ログインフォームに薄い文字追加
 
 ## home関連
-* about.html.
+* about.html.erbにそれっぽい文章を追加
+* application.sccsにaboutページのcss追加
