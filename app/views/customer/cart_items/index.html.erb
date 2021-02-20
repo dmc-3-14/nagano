@@ -1,2 +1,51 @@
-<h1>Customer::CartItems#index</h1>
-<p>Find me in app/views/customer/cart_items/index.html.erb</p>
+<h5>ショッピングカート</h5>
+  	
+  	<%= link_to "カートを空にする", alldestroy_cart_item_path(@cart_items), method: :delete, data: { confirm: "本当に削除しますか"}, class: "btn btn-danger" %>
+  	<table class='table'>
+  	  
+  	 <thead>
+		   <tr>
+		  <th></th>
+			 <th>商品名</th>
+			 <th>単価(税込)</th>
+			 <th>数量</th>
+			 <th>小計</th>
+			 <th></th>
+		     </tr>
+	   </thead>
+	<% tax = 1.1 %>
+	<% @sum = 0 %>
+ <% @cart_items.each do |cart| %>
+  	   <tbody>
+  		  <tr>
+  		     
+  		     <td><%= attachment_image_tag cart.item, :image, :fill, 60, 60, format:'jpeg', fallback: "no_image.jpg" %>
+  		     <td><%= cart.item.title %></td>
+  		     <td>¥<%= (cart.item.non_tax_price * tax).floor %></td>
+  		     <td>
+  		        <%= form_for(cart, url:cart_item_path(cart)) do |f| %>
+                <%= f.select :amount, options_for_select((1..20).to_a) %>
+                <%= f.submit "数量を変更する", class:"btn btn-primary btn-xs" %>
+            <% end %>
+  		     </td>
+  		     <td>¥<%= (cart.item.non_tax_price * cart.amount * tax).floor %></td>
+         <td><%= link_to 'Destroy', cart_item_path(cart), method: :delete, class: "btn btn-danger btn-xs" %></td>
+      </tr>
+      <tbody>
+      <% @sum += (cart.item.non_tax_price * cart.amount * tax).floor%>
+    <% end %>
+    </table>
+    <div class="col-2">
+    	<%= link_to '買い物を続ける', items_path, class: "btn btn-info btn-block btn-md" %>
+    </div>
+    <br>
+    <table class='table table-bordered col-2'>
+          <tr>
+             <td class="table-active col-2">合計金額<td>
+              ¥<%= @sum %>
+	      </tr>
+	</table>
+	      
+    <div class="col-2">
+    	<%= link_to '情報入力に進む', put_order_path(current_customer), class: "btn btn-primary btn-block btn-md" %>
+    <div>
