@@ -25,5 +25,7 @@ class Customer < ApplicationRecord
     clean_up_passwords
     result
   end
-
+  has_many :cart_items, dependent: :destroy
+  has_many :cart_items, dependent: :destroy
+  has_many :shippings, dependent: :destroy
 end
