@@ -1,9 +1,30 @@
 <div class="container">
   <div class="row">
-    <div class="mx-auto">
+    <div class="col-sm-8 mx-auto">
+      <div class="top-margin"></div>
 
-      <h2>カスタマー　トップページ</h2>
+    <div class="main-visual mx-auto"><!-- ここだけ中央寄せできなくて困った -->
+    <p>ようこそ長野ケーキへ</br>
+    ようこそ、ながのCAKEへ！</br>
+    このサイトは、ケーキ販売のECサイトになります。</br>
+    会員でない⽅も商品の閲覧はできますが、</br>
+    購⼊には会員登録が必要になります。</p>
+    </div>
 
+    <h3 class="new-item">新着商品</h3>
+
+    <div class="d-flex flex-row mx-auto">
+    <% @item.each.with_index(1) do |item, i| %>
+    <div class="item-box">
+      <%= attachment_image_tag item, :image, :fill, 200, 150, fallback: "no_image.jpg", size:'200x150' %>
+      <p><%=link_to item.title, item_path(item) %></p>
+      <p>¥<%= item.non_tax_price.to_s(:delimited) %></p>
+    </div>
+    <% end %>
 　　</div>
+　　　<%= link_to "全ての商品を⾒る >", items_path, class:"float-right" %>
+　</div>
+
+
 　</div>
 </div>

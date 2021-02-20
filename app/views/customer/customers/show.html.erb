@@ -1,38 +1,42 @@
-<h3>マイページ</h3>
-<a>登録情報　</a><%= link_to "編集する",  edit_customers_path, class: "btn btn-success" %>
-
-<table>
-<tbody>
-<tr>
-  <td>会員ID</td>
-  <td></td>
-</tr>
-<tr>
-  <td>氏名</td>
-  <td><%= @customer.last_name %> <%= @customer.first_name %></td>
-</tr>
-<tr>
-  <td>フリガナ</td>
-  <td><%= @customer.kana_last_name %> <%= @customer.kana_first_name %></td>
-</tr>
-<tr>
-  <td>郵便番号</td>
-  <td><%= @customer.post_code %></td>
-</tr>
-<tr>
-  <td>住所</td>
-  <td><%= @customer.address %></td>
-</tr>
-<tr>
-  <td>電話番号</td>
-  <td><%= @customer.telephone_number %></td>
-</tr>
-<tr>
-  <td>メールアドレス</td>
-  <td><%= @customer.email %></td>
-</tr>
-</tbody>
-</table>
-<a>配送先　　</a><%= link_to "一覧を見る", "/", class: "btn btn-primary" %></br>
-<a>注文履歴　</a><%= link_to "一覧を見る", "/", class: "btn btn-primary" %>
-
+<div class="container m-5">
+  <div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-1"></div>
+    <h4 class="my-4"><span style="background-color:#EFEFEF">　マイページ　</span></h4>
+  </div>
+  <a><span class="h5">登録情報　</span></a><%= link_to "　編集する　",  edit_customers_path, class: "btn btn-success" %>
+  <div class="row">
+  <table class="table table-bordered col-sm-12 col-md-8 col-lg-8 my-4">
+    <tbody>
+      <tr>
+        <td style="width:15%" class="table-active">会員ID</td>
+        <td style="width:60%"><%= @customer.id %></td>
+      </tr>
+      <tr>
+        <td class="table-active">氏名</td>
+        <td><%= @customer.last_name %> <%= @customer.first_name %></td>
+      </tr>
+      <tr>
+        <td class="table-active">フリガナ</td>
+        <td><%= @customer.kana_last_name %> <%= @customer.kana_first_name %></td>
+      </tr>
+      <tr>
+        <td class="table-active">郵便番号</td>
+        <td><%= @customer.post_code %></td>
+      </tr>
+      <tr>
+        <td class="table-active">住所</td>
+        <td><%= @customer.address %></td>
+      </tr>
+      <tr>
+        <td class="table-active">電話番号</td>
+        <td><%= @customer.telephone_number %></td>
+      </tr>
+      <tr>
+        <td class="table-active">メールアドレス</td>
+        <td><%= @customer.email %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<a><span class="h5">配送先　　</span></a><%= link_to " 　一覧を見る　", shippings_path, class: "btn btn-primary mb-4" %></br>
+<a><span class="h5">注文履歴　</span></a><%= link_to "　一覧を見る　", order_path(@customer), class: "btn btn-primary" %>
