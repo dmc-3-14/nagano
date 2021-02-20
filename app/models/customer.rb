@@ -25,9 +25,5 @@ class Customer < ApplicationRecord
     clean_up_passwords
     result
   end
-
-  def active_for_authentication?
-    super && (self.member_state == false)
-  end
-
+  
 end
