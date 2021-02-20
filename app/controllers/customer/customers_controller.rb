@@ -25,9 +25,7 @@ class Customer::CustomersController < ApplicationController
 
   def hide
     @customer = current_customer
-    #member_stateカラムにフラグを立てる(defaultはfalse)
     @customer.update(member_state: true)
-    #ログアウトさせる
     reset_session
     flash[:notice] = "ありがとうございました。またのご利用を心よりお待ちしております。"
     redirect_to root_path
