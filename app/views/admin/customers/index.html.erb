@@ -20,9 +20,9 @@
         <td><%= link_to customer.first_name, admin_customer_path(customer.id) %></td>
         <td><%= customer.email %></td>
           <% if customer.member_state %>
-            <td>退会</td>
+            <td>有効</td>
           <% else %>
-            <td class="text-success">有効</td>
+            <td>退会</td>
           <% end %>
         </tr>
     <% end %>
