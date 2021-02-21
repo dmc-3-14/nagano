@@ -22,13 +22,13 @@ class Customer::OrdersController < ApplicationController
       @order.address = current_customer.address
       @order.name = current_customer.last_name+current_customer.first_name
 
-    elsif  params[:order][:address_method] ==  "1"
-      @order.post_code = Shipping.find(params[:order][:address]).post_code
-      @order.address = Shipping.find(params[:order][:address]).shipping_address
-      @order.name = Shipping.find(params[:order][:address]).name
+    elsif  params[:order][:address_method] ==  "1" 
+      @order.post_code = Shipping.find(params[:order][:address_method]).post_code
+      @order.address = Shipping.find(params[:order][:address_method]).address
+      @order.name = Shipping.find(params[:order][:address_method]).name 
 
-    elsif params[:order][:address_method] ==  "2"
-      @order = Address.new()
+    elsif params[:order][:address] ==  "2" 
+      @order = Shipping.new()
       @order.post_code = params[:order][:post_code]
       @order.shipping_address = params[:order][:shipping_address]
       @order.name = params[:order][:name]
