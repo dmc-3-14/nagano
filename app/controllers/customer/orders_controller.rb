@@ -22,12 +22,12 @@ class Customer::OrdersController < ApplicationController
       @order.address = current_customer.address
       @order.name = current_customer.last_name+current_customer.first_name
 
-    elsif  params[:order][:address_method] ==  "1" 
+    elsif  params[:order][:address_method] ==  "1"
       @order.post_code = Shipping.find(params[:order][:address_method]).post_code
       @order.address = Shipping.find(params[:order][:address_method]).address
-      @order.name = Shipping.find(params[:order][:address_method]).name 
+      @order.name = Shipping.find(params[:order][:address_method]).name
 
-    elsif params[:order][:address] ==  "2" 
+    elsif params[:order][:address] ==  "2"
       @order = Shipping.new()
       @order.post_code = params[:order][:post_code]
       @order.shipping_address = params[:order][:shipping_address]
@@ -36,7 +36,7 @@ class Customer::OrdersController < ApplicationController
 
       if @address.save
       @order.post_code = @shipping_address.post_code
-      @order.address = @shipping_addressippingaddress.shipping_address
+      @order.address = @shipping_address.shipping_address
       @order.name = @shipping_address.name
 
       else
@@ -56,12 +56,17 @@ class Customer::OrdersController < ApplicationController
     end
 
     def create
-     @order = current_user.orders.new(order_params)
-     @order.save
-     redirect_to confirm_orders_path(@order)
+      @order = Order.new(order_params)
+      @order.customer_id = current_customer.id
+      if @order.save
+       redirect_to complete_orders_path
+      else
+        redirect_to home_about_path
+      end
     end
 
     private
+
     def order_params
       params.require(:order).permit(:customer_id, :post_code, :address, :name, :billing_amount, :fee, :payment_method, :state )
     end
