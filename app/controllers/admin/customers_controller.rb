@@ -1,6 +1,7 @@
 class Admin::CustomersController < ApplicationController
+
   def index
-    @customers = Customer.all
+    @customers = Customer.page(params[:page]).per(4)
   end
 
   def show
@@ -19,7 +20,7 @@ class Admin::CustomersController < ApplicationController
    else
      render :edit
    end
-end
+  end
 
     private
 
