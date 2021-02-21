@@ -45,7 +45,7 @@ class Customer::OrdersController < ApplicationController
 
       if @address.save
       @order.post_code = @shipping_address.post_code
-      @order.address = @shipping_address.shipping_address
+      @order.address = @shipping_address.address
       @order.name = @shipping_address.name
 
       else
@@ -62,14 +62,22 @@ class Customer::OrdersController < ApplicationController
     def create
       @order = Order.new(order_params)
       @order.customer_id = current_customer.id
+<<<<<<< HEAD
       #@CartItems = current_customer.cart_items
+=======
+      @CartItems = current_customer.cart_items
+>>>>>>> origin/develop
       if @order.save
        redirect_to complete_orders_path
       else
         redirect_to home_about_path
       end
     end
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> origin/develop
     private
     def order_params
       params.require(:order).permit(:customer_id, :post_code, :address, :name, :billing_amount, :fee, :payment_method, :state )
