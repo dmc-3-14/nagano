@@ -27,10 +27,7 @@
       <%= form_for @order, :url => { action: "update" } do |f| %>
       <%= f.select :state, ['入金待ち', '入金確認', '製作中', '発送準備中', '発送済み'] %>
       <%= f.submit "更新" %>
-<<<<<<< HEAD
       <% end %>
-=======
->>>>>>> develop
   </tr>
   <table class="table col-7 mx-auto">
     <thead class="thead-light">
@@ -43,7 +40,6 @@
       </tr>
     </thead>
     <tbody>
-<<<<<<< HEAD
 
 
     <!--商品中間テーブルのカラムを呼び出してます-->
@@ -52,22 +48,11 @@
         <td><%= Item.where(id: orderd_item.item_id).pluck(:name).join %></td>
         <td><%= '#{orderd_item.item.non_tax_price.to_s}' * 1.1 %></td>
         <td><%= orderd_item.quantity %></td>
-=======
-    <!--商品中間テーブルのカラムを呼び出してます-->
-    <% @ordrd_items.each do |orderd_item| %>
-      <tr>
-        <td><%= Item.where(id: orderd_item.item_id).pluck(:name).join %></td>
-        <td><%= '#{orderd_item.item.non_tax_price.to_s}' * 1.1 %></td>
-        <td><%= orderd_item.amount %></td>
->>>>>>> develop
         <td><%= orderd_item.price %></td>
         <td>
           <%= form_for(orderd_item, url: admin_orderd_item_path, html: {method: "patch"}) do |f| %>
           <%= f.select :create_state, ['着手不可', '製作待ち', '製作中', '製作完了'] %>
-<<<<<<< HEAD
           <% end %>
-=======
->>>>>>> develop
         </td>
         <td><%= f.submit "更新" %></td>
       </tr>
