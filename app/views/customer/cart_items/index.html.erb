@@ -19,7 +19,7 @@
   	   <tbody>
   		  <tr>
 
-  		     <td><%= attachment_image_tag cart.item, :image, :fill, 60, 60, format:'jpeg', fallback: "no_image.jpg" %>
+  		     <td><%= attachment_image_tag cart.item, :image, :fill, 60, 60, format:'jpeg', fallback: "no_image.jpg", size:'60x60' %>
   		     <td><%= cart.item.title %></td>
   		     <td>¥<%= (cart.item.non_tax_price * tax).floor %></td>
   		     <td>
@@ -43,10 +43,16 @@
           <tr>
              <td class="table-active col-2">合計金額<td>
               ¥<%= @sum %>
+<<<<<<< HEAD
 
 	         </tr>
 	  </table>
 	      
+=======
+	         </tr>
+	  </table>
+
+>>>>>>> develop
     <div class="col-2">
     	<%= link_to '情報入力に進む', put_orders_path, class: "btn btn-primary btn-block btn-md" %>
     <div>
