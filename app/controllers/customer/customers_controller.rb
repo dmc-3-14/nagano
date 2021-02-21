@@ -1,4 +1,6 @@
 class Customer::CustomersController < ApplicationController
+
+
   def show
     @customer = current_customer
   end
@@ -9,29 +11,27 @@ class Customer::CustomersController < ApplicationController
 
   def update
     @customer = current_customer
-    if @customer.update(current_params)
+    if @customer.update(customer_params)
      flash[:notice] = "You have updated user successfully."
      redirect_to customers_path
     else
-     render("customer/edit")
+     render :edit
     end
   end
 
   def exit
     @customer = current_customer
   end
-  
+
   def hide
     @customer = current_customer
-    #member_stateカラムにフラグを立てる(defaultはfalse)
     @customer.update(member_state: true)
-    #ログアウトさせる
     reset_session
     flash[:notice] = "ありがとうございました。またのご利用を心よりお待ちしております。"
     redirect_to root_path
   end
 
-  
+
   def active_for_authentication?
     super && (self.member_state == false)
   end
