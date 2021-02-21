@@ -1,2 +1,58 @@
-<h1>Customer::Orders#show</h1>
-<p>Find me in app/views/customer/orders/show.html.erb</p>
+<h1>注文履歴詳細</h1>
+
+<table class="order-info">
+  <h5>注文情報</h5>
+    <tr>
+      <td>注文日</td>
+      <td><%= @order.created_at.strftime('%Y/%m/%d') %></td>
+    </tr>
+    <tr>
+      <td>配送先</td>
+      <td>〒<%= @order.post_code %><br>
+         <%= @order.address %><br>
+         <%= @order.name %>
+      </td>
+    </tr>
+    <tr>
+      <td>支払方法</td>
+      <td><%= @order.payment_method %></td>
+    </tr>
+    <tr>
+      <td>ステータス</td>
+      <td><%= @order.state %></td>
+    </tr>
+</table>
+
+<table class="order-contents">
+  <h5>注文内容</h5>
+    <tr>
+      <th>商品</th>
+      <th>単価（税込）</th>
+      <th>個数</th>
+      <th>小計</th>
+    </tr>
+    <% @orderd_item.each do |orderd_item| %>
+    <tr>
+      <td><%= orderd_item.item.title %></td>
+      <td><%= orderd_item.items_tax_included.to_s(:delimited) %></td>
+      <td><%= orderd_item.quantity %></td>
+      <td><%= order.price %></td>
+    </tr>
+    <% end %>
+</table>
+
+<table class="billing-info">
+  <h5>請求情報</h5>
+    <tr>
+      <td>商品合計</td>
+      <td><%= @order.total_price.to_s(:delimited) %></td>
+    </tr>
+    <tr>
+      <td>配送料</td>
+      <td>800</td>
+    </tr>
+    <tr>
+      <td><strong>ご請求額</strong></td>
+      <td><%= @order.billing_amount.to_s(:delimited) %></td>
+    </tr>
+</table>
