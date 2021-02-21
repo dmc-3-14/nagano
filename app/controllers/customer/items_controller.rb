@@ -7,6 +7,6 @@ before_action :authenticate_customer!
   end
 
   def index
-    @items = Item.where(sale_state: "true")
+    @items = Item.limit(8)
   end
 end
