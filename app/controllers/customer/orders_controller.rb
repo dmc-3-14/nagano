@@ -15,6 +15,7 @@ class Customer::OrdersController < ApplicationController
   def confirm
     params[:order][:payment_method] = params[:order][:payment_method].to_i
     @order = Order.new(order_params)
+    @order.orderd_items.build
     @cart_items = current_customer.cart_items
 
     if params[:order][:address_method] == "0"
@@ -44,6 +45,18 @@ class Customer::OrdersController < ApplicationController
       end
 
     end
+
+
+    @cart_items = current_customer.cart_items
+    @total_quantity = cart_item.sum(:quantity)
+    @billing_amount = 0
+    @cart_items.each do |f|
+      @total_price += f.subtotal
+    end
+    # 小計を出しています。=0は初期化
+
+    @fee_billing_amount = @billing_amount + 800
+
   end
 
     def complete
