@@ -14,26 +14,26 @@
 	   <tbody>
 	       <% tax = 1.1 %>
 	       <% @sum = 0 %>
-  	      <% @cart_items.each do |cart| %>
+  	       <% @cart_items.each do |cart| %>
   		  <tr>
   		     <td>
   		         <%= attachment_image_tag cart.item, :image, :fill, 60, 60, format:'jpeg', fallback: "no_image.jpg" %>
   		         <%= cart.item.title %>
   		     </td>
-  		     <td><%= cart.non_tax_price * tax %></td>
-  		     <td><%= cart.amaunt %></td>
-  		     <td><%= cart.amaunt * cart.non_tax_price * tax %></td>　
+  		     <td>¥<%= (cart.item.non_tax_price * tax).floor %></td>
+  		     <td><%= cart.amount %>個</td>
+  		     <td>¥<%= (cart.amount * cart.item.non_tax_price * tax).floor %></td>　
           </tr>
+          <% @sum += (cart.amount * cart.item.non_tax_price * tax).floor %>
           <%end%>
        <tbody>
     
 </table>
 <% @Fee = 800 %>
-<table class='table'>
-       <tbody>
+<table class='table table-bordered col-2'>
             <tr>
                 <th>送料</th>
-                <td><%= Fee %></td>
+                <td>¥<%= @Fee %></td>
             </tr>
             <tr>
                 <th>商品合計</th>
@@ -41,15 +41,13 @@
             </tr>
             <tr>
                 <th>請求金額</th>
-                <td><%= @sum + Fee %></td>
+                <td>¥<%= @sum + @Fee %></td>
             </tr>
-       </tbody>
 </table>
 
 <h4>支払い方法</h4>
-<p><%= "#{session[:order]["payment_method"]}" %></p>
+<p><%= @order.payment_method %><p>
 
 <h4>お届け先</h4>
-<p><%= "#{session[:order]["post_number"]} #{session[:order]["address"]} #{session[:order]["name"]}" %></p>
-
-<%= link_to '注文を確定する', complete_order_path, class: "btn btn-xs btn-success" %>
+<%= @order.post_code %> <%= @order.address %> <%= @order.name %>
+<p><%= link_to '注文を確定する', complete_orders_path, class: "btn btn-xs btn-success" %><p>
