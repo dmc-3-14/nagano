@@ -46,11 +46,8 @@
 </table>
 
 <h4>支払い方法</h4>
-<%#= f.hidden_field :payment_method, value:@order.payment_method %>
 <p><%= @order.payment_method %><p>
 
 <h4>お届け先</h4>
-<%#= f.hidden_field :postcode, value:@order.postcode %>
-<%= @order. %>
-
-<%= link_to '注文を確定する', complete_orders_path, class: "btn btn-xs btn-success" %>
+<%= @order.post_code %> <%= @order.address %> <%= @order.name %>
+<p><%= link_to '注文を確定する', complete_orders_path, class: "btn btn-xs btn-success" %><p>
