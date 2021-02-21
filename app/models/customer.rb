@@ -25,5 +25,12 @@ class Customer < ApplicationRecord
     clean_up_passwords
     result
   end
+  has_many :orders, dependent: :destroy
+  has_many :cart_items, dependent: :destroy
+  has_many :shippings, dependent: :destroy
+
+  def active_for_authentication?
+    super && (self.member_state == true)
+  end
 
 end
