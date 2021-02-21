@@ -4,6 +4,7 @@
 
       <h2>ログイン</h2>
       <h4>会員の方はこちらからログイン</h4>
+      <%= flash[:error] %>
 
       <%= form_with model: @customer, url: customer_session_path, local: true do |f| %>
         <table class=table>

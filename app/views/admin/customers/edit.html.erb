@@ -15,7 +15,7 @@
         </tr>
       </thead>
       <tbody>
-        <%= form_for @customer, url: admin_registration_path do |f| %>
+        <%= form_for @customer, :url => {action:"update"} do |f| %>
         <tr>
           <td>氏名</td>
           <td><%= f.text_field :last_name %></td>
@@ -48,8 +48,8 @@
         </tr>
         <tr>
           <td><%= f.label :member_state, '会員ステータス' %></td>
-          <td><%= f.radio_button :member_state, true %>退会
-              <%= f.radio_button :member_state, false %>有効
+          <td><%= f.radio_button :member_state, :true %>有効
+              <%= f.radio_button :member_state, :false %>退会
           </td>
           <td></td>
         </tr>
