@@ -1,4 +1,5 @@
 class Customer::OrdersController < ApplicationController
+  before_action :authenticate_customer!
 
   def show
     @order = Order.find(params[:id])
@@ -24,7 +25,6 @@ class Customer::OrdersController < ApplicationController
   def confirm
     params[:order][:payment_method] = params[:order][:payment_method].to_i
     @order = Order.new(order_params)
-    @cart_items = current_customer.cart_items
 
     if params[:order][:address_method] == "0"
       @order.post_code = current_customer.post_code
@@ -51,33 +51,33 @@ class Customer::OrdersController < ApplicationController
       else
         render 'put'
       end
-
     end
+      @cart_items = CartItem.where(customer_id: current_customer.id)
+      @total = 0
   end
 
     def complete
     end
 
-
     def create
       @order = Order.new(order_params)
       @order.customer_id = current_customer.id
-<<<<<<< HEAD
-      #@CartItems = current_customer.cart_items
-=======
       @CartItems = current_customer.cart_items
->>>>>>> origin/develop
-      if @order.save
-       redirect_to complete_orders_path
-      else
-        redirect_to home_about_path
+      @order.save
+      #orderd_itemsの保存
+      current_customer.cart_items.each do |cart_item|
+        @orderd_item = OrderdItem.new
+        @orderd_item.item_id = cart_item.item_id
+        @orderd_item.quantity = cart_item.amount
+        @orderd_item.price = (cart_item.item.non_tax_price * 1.1).floor
+        @orderd_item.order_id = @order.id  #注文商品に注文idを紐付け
+        @orderd_item.save  #注文商品を保存
       end
+
+      current_customer.cart_items.destroy_all
+      redirect_to complete_orders_path
     end
-<<<<<<< HEAD
 
-=======
-
->>>>>>> origin/develop
     private
     def order_params
       params.require(:order).permit(:customer_id, :post_code, :address, :name, :billing_amount, :fee, :payment_method, :state )
