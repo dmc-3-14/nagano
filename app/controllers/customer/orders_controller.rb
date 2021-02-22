@@ -29,9 +29,10 @@ class Customer::OrdersController < ApplicationController
       @order.name = current_customer.last_name+current_customer.first_name
 
     elsif  params[:order][:address_method] ==  "1"
-      @order.post_code = Shipping.find(params[:order][:address_method]).post_code
-      @order.address = Shipping.find(params[:order][:address_method]).address
-      @order.name = Shipping.find(params[:order][:address_method]).name
+      shipping = Shipping.find(params[:order][:shipping_id])
+      @order.post_code = shipping.post_code
+      @order.address = shipping.address
+      @order.name = shipping.name
 
     elsif params[:order][:address] ==  "2"
       @order = Shipping.new()
