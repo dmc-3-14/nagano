@@ -6,25 +6,26 @@
   </div>
    <div class="row">
     <div class="mx-auto">
+    <%= form_with model: @admin, url: admin_session_path, local: true do |f| %>
     <table class="table table-borderless">
-    <tbody>
-      <%= form_with model: @admin, url: admin_session_path, local: true do |f| %>
-      <tr>
-        <td><%= f.label "メールアドレス"  %></td>
-        <td><%= f.email_field :email, autofocus: true, autocomplete: "email" %></td>
-      </tr>
-      <tr>
-        <td><%= f.label "パスワード" %></td>
-        <td><%= f.password_field :password, autocomplete: "current-password" %></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td><%= f.submit "ログイン", class:'btn btn-primary' %></td>
-      </tr>
-       <% end %>
-    </tbody>
+      <tbody>
+        <tr>
+          <td><%= f.label "メールアドレス"  %></td>
+          <td><%= f.email_field :email, autofocus: true, autocomplete: "email" %></td>
+        </tr>
+        <tr>
+          <td><%= f.label "パスワード" %></td>
+          <td><%= f.password_field :password, autocomplete: "current-password" %></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><%= f.submit "ログイン", class:'btn btn-primary' %></td>
+        </tr>
+      </tbody>
+    </table>
+    <% end %>
     </div>
-  </div>
+    </div>
    </div>
 </div>
 
