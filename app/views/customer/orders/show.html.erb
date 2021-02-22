@@ -22,7 +22,7 @@
       <td><%= @order.state %></td>
     </tr>
 </table>
-
+<br>
 <table class="order-contents">
   <h5>注文内容</h5>
     <tr>
@@ -36,17 +36,17 @@
     <% @orderd_items.each do |orderd_item| %>
     <tr>
       <td><%= orderd_item.item.title %></td>
-      <td><%= (orderd_item.item.non_tax_price * 1.1).floor %></td>
+      <td><%= orderd_item.price.to_s(:delimited) %></td>
       <td><%= orderd_item.quantity %></td>
      <!--１つの商品の価格×数量を計算-->
-      <% @x = orderd_item.price * orderd_item.quantity %>  #@
+      <% @x = orderd_item.price * orderd_item.quantity %>
         <!--eachの数だけ@sumに足していく-->
       <% @sum += @x %>
       <td><%= @x.to_s(:delimited) %></td>
     </tr>
     <% end %>
 </table>
-
+<br>
 <table class="billing-info">
   <h5>請求情報</h5>
     <tr>

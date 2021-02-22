@@ -25,7 +25,7 @@
         </td>
 
     <% @sum = 0 %>
-    <% @orderd_items.each do |orderd_item| %>
+    <% order.orderd_items.each do |orderd_item| %>
         <!--１つの商品の価格×数量を計算-->
         <% @x = orderd_item.price * orderd_item.quantity %>
         <!--eachの数だけ@sumに足していく-->
