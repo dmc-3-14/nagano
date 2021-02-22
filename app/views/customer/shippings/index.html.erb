@@ -41,7 +41,9 @@
       <td><%= shipping.address %></td>
       <td><%= shipping.name %></td>
       <td style="width:35%"><%= link_to "編集する", edit_shipping_path(shipping.id), class: "btn btn-success mx-3" %><%= link_to "削除する", "/shippings/#{shipping.id}", method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %></td>
+
     </tr>
   <% end %>
   </tbody>
 </table>
+<% @shippings.each do |shipping| %>
