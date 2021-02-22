@@ -47,8 +47,6 @@
         </thead>
 
         <tbody>
-
-
             <!--商品中間テーブルのカラムを呼び出してます-->
             <% @sum = 0 %>
             <% @orderd_items.each do |orderd_item| %>
@@ -65,7 +63,7 @@
                 <% @sum += @x %>
                 <td>
                   <%= form_for orderd_item, url: admin_orderd_item_path(orderd_item) do |f| %>
-                  <%= f.select :create_state, ['着手不可', '制作待ち', '製作中', '製作完了'] %>
+                  <%= f.select :create_state, ['着手不可', '制作待ち', '制作中', '制作完了'] %>
                   <td><%= f.submit "更新", class:'btn btn-success' %></td>
                   <% end %>
                 </td>
