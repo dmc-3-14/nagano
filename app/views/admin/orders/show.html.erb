@@ -1,58 +1,96 @@
-<h1>注文履歴詳細</h1>
-<table class=table>
-  <tr>
-    <th>購入者</th>
-    <th><%= @order.name %></th>
-  </tr>
-  <tr>
-    <th>注文日</th>
-    <th><%= @order.created_at %></th>
-  </tr>
-  <tr>
-  <tr>
-    <th>配送先</th>
-    <th>
-      <%= @order.post_code %>
-      <%= @order.address %>
-      <%= @order.name %>
-    </th>
-  </tr>
-  <tr>
-    <th>支払方法</th>
-    <th><%= @order.payment_method %></th>
-  </tr>
-  <tr>
-    <th>注文ステータス</th>
-    <th>
-      <%= form_for @order, :url => { action: "update" } do |f| %>
-      <%= f.select :state, ['入金待ち', '入金確認', '製作中', '発送準備中', '発送済み'] %>
-      <%= f.submit "更新" %>
-  </tr>
-  <table class="table col-7 mx-auto">
-    <thead class="thead-light">
-      <tr>
-        <th>商品名</th>
-        <th>単価(税込)</th>
-        <th>数量</th>
-        <th>小計</th>
-        <th>制作ステータス</th>
-      </tr>
-    </thead>
-    <tbody>
-    <!--商品中間テーブルのカラムを呼び出してます-->
-    <% @ordrd_items.each do |orderd_item| %>
-      <tr>
-        <td><%= Item.where(id: orderd_item.item_id).pluck(:name).join %></td>
-        <td><%= '#{orderd_item.item.non_tax_price.to_s}' * 1.1 %></td>
-        <td><%= orderd_item.amount %></td>
-        <td><%= orderd_item.price %></td>
-        <td>
-          <%= form_for(orderd_item, url: admin_orderd_item_path, html: {method: "patch"}) do |f| %>
-          <%= f.select :create_state, ['着手不可', '製作待ち', '製作中', '製作完了'] %>
-        </td>
-        <td><%= f.submit "更新" %></td>
-      </tr>
-      </tr>
-    <% end %>
-    </tbody>
-  </table>
+<div class="container">
+  <div class="row">
+
+    <h1>注文履歴詳細</h1>
+      <table class=table>
+        <tr>
+          <th>購入者</th>
+          <th><%= @order.customer.last_name + @order.customer.first_name %></th>
+        </tr>
+        <tr>
+          <th>注文日</th>
+          <th><%= @order.created_at %></th>
+        </tr>
+        <tr>
+        <tr>
+          <th>配送先</th>
+          <th>
+            <%= @order.post_code %>
+            <%= @order.address %>
+            <%= @order.name %>
+          </th>
+        </tr>
+        <tr>
+          <th>支払方法</th>
+          <th><%= @order.payment_method %></th>
+        </tr>
+        <tr>
+          <th>注文ステータス</th>
+          <th>
+            <%= form_for @order, :url => { action: "update" } do |f| %>
+            <%= f.select :state, ['入金待ち', '入金確認', '製作中', '発送準備中', '発送済み'] %>
+            <%= f.submit "更新", class:'btn btn-success' %>
+            <% end %>
+        </tr>
+      </table>
+
+
+      <table class="table col-7">
+        <thead class="thead-light">
+          <tr>
+            <th>商品名</th>
+            <th>単価(税込)</th>
+            <th>数量</th>
+            <th>小計</th>
+            <th>制作ステータス</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+
+            <!--商品中間テーブルのカラムを呼び出してます-->
+            <% @sum = 0 %>
+            <% @orderd_items.each do |orderd_item| %>
+              <tr>
+                <td><%= orderd_item.item.title %></td>
+                <td><%= orderd_item.item.non_tax_price.to_s(:delimited) %></td>
+                <td><%= orderd_item.quantity %></td>
+                <td><%= orderd_item.price %></td>
+
+                <!--１つの商品の価格×数量を計算-->
+                <% @x = orderd_item.price * orderd_item.quantity %>
+
+                <!--eachの数だけ@sumに足していく-->
+                <% @sum += @x %>
+                <td>
+                  <%= form_for orderd_item, url: admin_orderd_item_path(orderd_item) do |f| %>
+                  <%= f.select :create_state, ['着手不可', '制作待ち', '製作中', '製作完了'] %>
+                  <td><%= f.submit "更新", class:'btn btn-success' %></td>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+
+      <table class="col-3">
+        <tr>
+          <th>商品合計</th>
+          <th><%= @sum.to_s(:delimited) %></th>
+        </tr>
+        <tr>
+          <th>送料</th>
+          <th>800</th>
+        </tr>
+        <tr>
+          <th>請求合計金額</th>
+          <% @total = @sum +800 %>
+          <th><%= @total.to_s(:delimited) %></th>
+        </tr>
+
+      </table>
+    </div>
+  </div>
+

@@ -74,5 +74,7 @@ Rails.application.routes.draw do
     passwords:     'customers/passwords',
     registrations: 'customers/registrations'
   }
+  
+  
 
 end
