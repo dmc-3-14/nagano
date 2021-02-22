@@ -19,7 +19,11 @@
       <tr>
         <td><%= order.customer.created_at.strftime("%Y-%m-%d %H:%M") %></td>
         <td><%= order.name %></td>
-        <td><%= order.orderd_items.quantity %></td>
+        <td>
+          <% @orderd_items.each do |orderd_item| %>
+          <%= order.orderd_item.quantity %>
+          <% end %>
+          </td>
         <td><%= order.state %></td>
         <td><%= link_to '詳細画面へ', admin_order_path(order), class: "btn btn-info" %></td>
       </tr>
