@@ -10,7 +10,7 @@
     <table class="table">
       <h5><strong>注文情報</strong></h5>
         <tr>
-          <td class="table-active">注文日</td>
+          <td style="width:15%" class="table-active">注文日</td>
           <td><%= @order.created_at.strftime('%Y/%m/%d') %></td>
         </tr>
         <tr>
@@ -29,8 +29,8 @@
           <td><%= @order.state %></td>
         </tr>
     </table>
-    <br>
-    <table class="table col=7">
+    
+    <table class="table">
       <h5><strong>注文内容</strong></h5>
       <thead class="table-active">
         <tr>
@@ -54,11 +54,11 @@
         </tr>
         <% end %>
     </table>
-    <br>
-    <table class="table col=3">
+    
+    <table class="table">
       <h5><strong>請求情報</state></h5>
         <tr>
-          <td class="table-active">商品合計</td>
+          <td style="width:15%" class="table-active">商品合計</td>
           <td><%= @sum.to_s(:delimited) %></td>
         </tr>
         <tr>
