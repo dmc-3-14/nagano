@@ -1,37 +1,40 @@
-<div class="container">
+<div class="container m-5">
   <div class="row">
-    <div class="mx-auto">
-
-      <br>
-      <h1>ジャンル一覧・追加</h1>
-      <%= render 'layouts/errors', obj: @genre %>
-      <%= form_for @genre, :url => {action:"create"} do |f| %>
-        <br>
-        <h4>ジャンル名</h4>
-        <%= f.text_field :name %>
-        <%= f.submit '新規登録', class: 'btn btn-success' %>
-      <% end %>
-
-
-      <% if @genres.exists? %>
-        <table>
-
-          <th>ジャンル</th>
+    <div class="col-1"></div>
+      <h4 class="my-4 mb-5"><span style="background-color:#EFEFEF"> ジャンル一覧・追加　</span></h4>
+  </div>
+    <%= render 'layouts/errors', obj: @genre %>
+    <div class="row">
+      <teble class="table table-borderless mb-5">
+        <%= form_for @genre, :url => {action:"create"} do |f| %>
+        <tr>
+          <td>ジャンル名</td>
+          <td><%= f.text_field :name %></td>
+          <td><%= f.submit '新規登録', class: 'btn btn-success' %></td>
+        </tr>
+        <% end %>
+      </table>
+    </div>
+    <% if @genres.exists? %>
+      <table class="teble col-3">
+        <thead>
+          <tr>
+            <th>ジャンル</th>
+          </tr>
+        </thead>
+        <tbody>
           <% @genres.each do |genre| %>
-            <br>
             <tr>
               <td><%= genre.name %></td>
               <td><%= link_to '編集する', edit_admin_genre_path(genre) , class: "btn btn-success" %></td>
             </tr>
-            <% end %>
-        </table>
-      <% else %>
-        <br><br>
-        <h4>まだジャンルが追加されていません。</h4>
-      <% end %>
-
-
-
+           <% end %>
+        </tbody>
+      </table>
+        <% else %>
+          <br><br>
+          <h4>まだジャンルが追加されていません。</h4>
+        <% end %>
     </div>
   </div>
 </div>
