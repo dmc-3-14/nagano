@@ -4,26 +4,26 @@
     <h4 class="my-4"><span style="background-color:#EFEFEF">　配送先登録 / 一覧　</span></h4>
   </div>
 
-<table class="col-sm-12 col-md-8 col-lg-8 my-4">
-<tbody>
-  <%= form_for @shipping, :url => {action:"create"} do |f| %>
-    <tr>
-      <td style="width:30%" class="pb-3">郵便番号(ハイフンなし)</td>
-      <td class="pb-3"><%= f.text_field :post_code %></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td class="pb-3">住所</td>
-      <td class="pb-3" colspan="2"><%= f.text_field :address %></td>
-    </tr>
-    <tr>
-      <td class="pb-3">宛名</td>
-      <td class="pb-3"><%= f.text_field :name %></td>
-      <td class="pb-3"><%= f.submit '新規登録', class: "btn btn-success" %></td>
-    </tr>
-  <% end %>
-  </tbody>
-</teble>
+<%= form_for @shipping, :url => {action:"create"} do |f| %>
+  <table class="col-sm-12 col-md-8 col-lg-8 my-4">
+  <tbody>
+      <tr>
+        <td style="width:30%" class="pb-3">郵便番号(ハイフンなし)</td>
+        <td class="pb-3"><%= f.text_field :post_code %></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="pb-3">住所</td>
+        <td class="pb-3" colspan="2"><%= f.text_field :address %></td>
+      </tr>
+      <tr>
+        <td class="pb-3">宛名</td>
+        <td class="pb-3"><%= f.text_field :name %></td>
+        <td class="pb-3"><%= f.submit '新規登録', class: "btn btn-success" %></td>
+      </tr>
+    </tbody>
+  </teble>
+<% end %>
 
 <table class="table table-bordered table-sm col-8">
   <thead class="table-light">
