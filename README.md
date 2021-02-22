@@ -1,4 +1,5 @@
-##3つのファイルのひな形 作成
-* admin/orders_controller
-* admin/orders/index.html
-* admin/orders/show.html
+##修正箇所
+* 1 管理者ログアウト後の遷移先を管理者ログイン画面に設定
+*
+## いじったファイル
+* １　admins/session_controller
