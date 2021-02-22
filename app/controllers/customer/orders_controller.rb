@@ -1,6 +1,7 @@
 class Customer::OrdersController < ApplicationController
   before_action :authenticate_customer!
 
+
   def show
     @order = Order.find(params[:id])
     @orderd_items = OrderdItem.where(order_id: params[:id])
@@ -45,7 +46,7 @@ class Customer::OrdersController < ApplicationController
       @order.name = @shipping_address.name
 
       else
-        render 'put'
+        redirect_to home_about_path
       end
     end
       @cart_items = CartItem.where(customer_id: current_customer.id)
