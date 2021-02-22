@@ -1,10 +1,10 @@
 <div class="container m-5">
   <div class="row">
-    <div class="col-sm-12 col-md-8 col-lg-1"></div>
-      <h4 class="my-4"><span style="background-color:#EFEFEF">　<%= @customer.last_name %><%= @customer.first_name %>さんの会員詳細　</span></h4>
+    <div class="col-1"></div>
+      <h4 class="my-4"><span style="background-color:#EFEFEF">　<%= @customer.last_name + @customer.first_name %>さんの会員詳細　</span></h4>
   </div>
   <div class="row">
-    <div class="col-sm-12 col-md-8 col-lg-1"></div>
+    <div class="col-1"></div>
     <table class="table table-borderless">
       <tbody>
         <tr>
@@ -14,11 +14,11 @@
         </tr>
         <tr>
           <td>氏名</td>
-          <td><%= @customer.last_name %><%= @customer.first_name %></td>
+          <td><%= @customer.last_name +  @customer.first_name %></td>
         </tr>
         <tr>
           <td>フリガナ</td>
-          <td><%= @customer.kana_last_name %><%= @customer.kana_first_name %></td>
+          <td><%= @customer.kana_last_name + @customer.kana_first_name %></td>
         </tr>
         <tr>
           <td>郵便番号</td>
