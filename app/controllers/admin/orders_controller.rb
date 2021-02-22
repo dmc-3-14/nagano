@@ -4,6 +4,7 @@ class Admin::OrdersController < ApplicationController
   def index
     @orders = Order.all
   end
+
   def show
 		@order = Order.find(params[:id])
     #show.html内でorderd_item(中間テーブル)を呼び出すために使用する
@@ -20,7 +21,7 @@ class Admin::OrdersController < ApplicationController
 # show.htmlにてorderd_itemの制作ステータスを更新できるようにするため、rderd_item_attributes: [:create_state] を記述しています
 # attributesの使用方法は調べてもらえると。　僕は理解できてないまま攻略本みてコード書きました
   def order_params
-    params.require(:order).permit(:state, orderd_item_attributes: [:create_state] )
+    params.require(:order).permit(:state)
   end
 end
 
