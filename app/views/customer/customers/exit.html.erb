@@ -1,12 +1,17 @@
-<div>
-  <h3>本当に退会しますか？</h3>
-  <p>退会すると、会員登録情報や</br>
-これまでの購⼊履歴が閲覧できなくなります。</br>
-退会する場合は、「退会する」をクリックしてください。</p>
-</div>
-<%= flash[:error] %>
-<div>
-  <% if customer_signed_in? && @customer.id == current_customer.id %>
-        <%= link_to "退会", customers_hide_customers_path(current_customer), method: :put, "data-confirm" => "本当に退会しますか？", class: "btn btn-outline-danger" %>
-<% end %>
+<div class="container">
+  <div class="m-auto text-center h-100 w-100 d-flex align-items-center justify-content-center">
+    <div>
+      <h3>本当に退会しますか？</h3>
+      </br>
+      <p>退会すると、会員登録情報や</br>
+      これまでの購⼊履歴が閲覧できなくなります。</br>
+      退会する場合は、「退会する」をクリックしてください。</p>
+       </br>
+      <%= flash[:error] %>
+      <%= link_to "退会しない", customers_path, class: "btn btn-primary" %>
+      <% if customer_signed_in? && @customer.id == current_customer.id %>
+         <%= link_to "退会する", customers_hide_customers_path(current_customer), method: :put, "data-confirm" => "本当に退会しますか？", class: "btn btn-danger" %>
+      <% end %>
+    </div>
+  </div>
 </div>
