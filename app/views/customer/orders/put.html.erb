@@ -3,6 +3,7 @@
     <div class="col-2"></div>
     <h4 class="my-4 "><span style="background-color:#EFEFEF">　注文情報入力　</span></h4>
   </div>
+     <% render 'layouts/errors',obj: @order %>
      <%= form_with model: @order, url: confirm_orders_path do |f| %>
      <h5>支払方法</h5>
      <div class="row">

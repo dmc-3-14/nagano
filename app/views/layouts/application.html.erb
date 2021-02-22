@@ -14,6 +14,9 @@
     <% if flash[:notice] %>
        <h3 class="flash-green"><%= flash[:notice] %></h3>
 　　<% end %>
+　　<% if flash[:alert] %>
+       <h3 class="flash-red"><%= flash[:alert] %></h3>
+　　<% end %>
 
     <%= yield %>
   </body>
