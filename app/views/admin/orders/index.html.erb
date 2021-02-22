@@ -20,8 +20,8 @@
         <td><%= order.customer.created_at.strftime("%Y-%m-%d %H:%M") %></td>
         <td><%= order.name %></td>
         <td>
-          <% @orderd_items.each do |orderd_item| %>
-          <%= order.orderd_item.quantity %>
+          <% order.orderd_items.each do |orderd_item| %>
+          <%= orderd_item.quantity %>
           <% end %>
           </td>
         <td><%= order.state %></td>
