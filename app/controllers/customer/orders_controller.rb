@@ -3,7 +3,7 @@ class Customer::OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
-    @order_item = @order.orderd_items
+    @orderd_items = OrderdItem.where(order_id: params[:id])
     @cart_items = current_customer.cart_items
     @total_price = 0    #小計の初期値0
     @cart_items.each do |f|
@@ -14,6 +14,7 @@ class Customer::OrdersController < ApplicationController
 
   def index
     @orders = current_customer.orders
+    @orderd_items = OrderdItem.where(order_id: params[:id])
   end
 
   def put
