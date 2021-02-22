@@ -1,32 +1,46 @@
-<h1>商品詳細</h1>
-<table>
-  <tr><%= attachment_image_tag @item, :image, :fill, 200, 150, fallback: "no_image.jpg", size:'200x150' %></tr>
-  <tr>
-    <th>商品名</th>
-    <th><%= @item.title %></th>
-  </tr>
-  <tr>
-    <th>商品説明</th>
-    <th><%= @item.body %></th>
-  </tr>
-  <tr>
-    <th>ジャンル</th>
-    <th><%= @item.genre.name %></th>
-  </tr>
-  <tr>
-    <th>税込価格<br>(税抜価格)</th>
-    <th><%= @item.tax_included.to_s(:delimited) %>(<%= @item.non_tax_price.to_s(:delimited) %>)円</th>
-  </tr>
-  <tr>
-    <th>販売ステータス</th>
-    <% if @item.sale_state %>
-    <th>販売中</th>
-    <% else %>
-    <th>販売停止中</th>
-    <% end %>
-  </tr>
-</table>
-
-<%= link_to "編集する", edit_admin_item_path(@item), class: 'btn btn-success' %>
-
-
+<div class="container m-5">
+  <div class="row">
+    <div class="col-2"></div>
+    <h4 class="my-4"><span style="background-color:#EFEFEF">　商品詳細　</span></h4>
+  </div>
+  <div class="row mt-5">
+    <div class="col-2"></div>
+      <div class="col-3">
+        <%= attachment_image_tag @item, :image, :fill, 200, 150, fallback: "no_image.jpg", size:'200x150' %>
+      </div>
+      <div>
+      <table class="table table-borderless">
+        <tr>
+          <td>商品名</td>
+          <td class="h5"><%= @item.title %></td>
+        </tr>
+        <tr>
+          <td>商品説明</td>
+          <td class="h5"><%= @item.body %></td>
+        </tr>
+        <tr>
+          <td>ジャンル</td>
+          <td class="h5"><%= @item.genre.name %></td>
+        </tr>
+        <tr>
+          <td>税込価格<br>(税抜価格)</td>
+          <td class="align-middle h5"><%= @item.tax_included.to_s(:delimited) %>(<%= @item.non_tax_price.to_s(:delimited)  %>)円</td>
+        </tr>
+        <tr>
+          <td>販売ステータス</td>
+          <% if @item.sale_state %>
+          <td class="h5 text-success">販売中</td>
+          <% else %>
+          <td>販売停止中</td>
+          <% end %>
+        </tr>
+      </table>
+        </div>
+        <div class="col-2"></div>
+  </div>
+</div>
+ <div class="row">
+   <div class="mx-auto">
+    <%= link_to "　編集する　", edit_admin_item_path(@item), class: 'btn btn-success p-3' %>
+  </div>
+</div>
