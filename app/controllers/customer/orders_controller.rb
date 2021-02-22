@@ -10,7 +10,7 @@ class Customer::OrdersController < ApplicationController
 
   def index
     @orders = current_customer.orders
-    
+
   end
 
   def put
@@ -46,7 +46,7 @@ class Customer::OrdersController < ApplicationController
       @order.name = @shipping_address.name
 
       else
-        redirect_to home_about_path
+        render 'put'
       end
     end
       @cart_items = CartItem.where(customer_id: current_customer.id)
@@ -60,19 +60,23 @@ class Customer::OrdersController < ApplicationController
       @order = Order.new(order_params)
       @order.customer_id = current_customer.id
       @CartItems = current_customer.cart_items
-      @order.save
-      #orderd_itemsの保存
-      current_customer.cart_items.each do |cart_item|
-        @orderd_item = OrderdItem.new
-        @orderd_item.item_id = cart_item.item_id
-        @orderd_item.quantity = cart_item.amount
-        @orderd_item.price = (cart_item.item.non_tax_price * 1.1).floor
-        @orderd_item.order_id = @order.id  #注文商品に注文idを紐付け
-        @orderd_item.save  #注文商品を保存
-      end
 
-      current_customer.cart_items.destroy_all
-      redirect_to complete_orders_path
+      if  @order.save
+        #orderd_itemsの保存
+        current_customer.cart_items.each do |cart_item|
+          @orderd_item = OrderdItem.new
+          @orderd_item.item_id = cart_item.item_id
+          @orderd_item.quantity = cart_item.amount
+          @orderd_item.price = (cart_item.item.non_tax_price * 1.1).floor
+          @orderd_item.order_id = @order.id  #注文商品に注文idを紐付け
+          @orderd_item.save  #注文商品を保存
+        end
+        current_customer.cart_items.destroy_all
+        redirect_to complete_orders_path
+      else
+        flash[:alert] = "お届け先が正しく入力されていません。お届け先の入力をお願いします。"
+        redirect_to  put_orders_path
+      end
     end
 
     private

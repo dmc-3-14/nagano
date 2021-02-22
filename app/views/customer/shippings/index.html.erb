@@ -41,7 +41,33 @@
       <td><%= shipping.address %></td>
       <td><%= shipping.name %></td>
       <td style="width:35%"><%= link_to "編集する", edit_shipping_path(shipping.id), class: "btn btn-success mx-3" %><%= link_to "削除する", "/shippings/#{shipping.id}", method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %></td>
+
     </tr>
   <% end %>
   </tbody>
 </table>
+
+
+<!--注文情報入力画面で新しいお届け先を選択した場合　現状表示のみ　編集削除は困難な気がする-->
+<table class="table table-bordered table-sm col-8">
+  <thead class="table-light">
+    <tr>
+      <th>郵便番号</th>
+      <th>住所</th>
+      <th>宛名</th>
+      <th>　</th>
+    </tr>
+  </thead>
+  <tbody>
+
+
+  <% @shipping.customer.orders.each do |order| %>
+    <tr>
+      <td><%= order.post_code %></td>
+      <td><%= order.address %></td>
+      <td><%= order.name %></td>
+    </tr>
+     <% end %>
+   </tbody>
+  </table>
+
