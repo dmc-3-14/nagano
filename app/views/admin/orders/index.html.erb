@@ -17,10 +17,10 @@
     <tbody>
     <% @orders.each do |order| %>
       <tr>
-        <td><%= l customer.created_at %></td>
+        <td><%= order.customer.created_at.strftime("%Y-%m-%d %H:%M") %></td>
         <td><%= order.name %></td>
-        <td><%= order.billing_amount %></td>
-        <td><%= order.status %></td>
+        <td><%= order.amount %></td>
+        <td><%= order.state %></td>
         <td><%= link_to '詳細画面へ', admin_order_path(order), class: "btn btn-info" %></td>
       </tr>
     <% end %>

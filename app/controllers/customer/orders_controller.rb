@@ -17,6 +17,7 @@ class Customer::OrdersController < ApplicationController
     @order = Order.new(order_params)
     @cart_items = current_customer.cart_items
     
+    
     if params[:order][:address_method] == "0" 
       @order.post_code = current_customer.post_code 
       @order.address = current_customer.address
@@ -49,12 +50,6 @@ class Customer::OrdersController < ApplicationController
     def complete
     end
   
-    def index
-    end
-  
-    def show
-    end
-  
     def create
       @order = Order.new(order_params)
       @order.customer_id = current_customer.id
@@ -62,7 +57,7 @@ class Customer::OrdersController < ApplicationController
       if @order.save
        redirect_to complete_orders_path
       else
-        redirect_to home_about_path
+       redirect_to home_about_path
       end
     end
     

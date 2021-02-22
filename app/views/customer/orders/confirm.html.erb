@@ -49,7 +49,7 @@
      <%= f.hidden_field :name, :value => @order.name %>
      <%= f.hidden_field :post_code, :value => @order.post_code %>
      <%= f.hidden_field :address, :value => @order.address %>
-     <%= f.hidden_field :billing_amount, :value => @order.billing_amount %>
+     <%#= f.hidden_field :amount, :value => @order.amount %>
      <%= f.hidden_field :payment_method, :value => @order.payment_method %>
     <p><%= f.submit '注文を確定する', class: "btn btn-xs btn-success" %><p>
     <% end %>
