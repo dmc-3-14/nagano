@@ -20,16 +20,10 @@
         <td><%= order.customer.created_at.strftime("%Y-%m-%d %H:%M") %></td>
         <td><%= order.name %></td>
         <td>
-          <% @sum = 0 %>
-          <% order.orderd_items.each do |orderd_item| %>
-          <!--１つの商品の数量を計算-->
-          <% @x = orderd_item.quantity %>
-          <!--eachの数だけ@sumに足していく-->
-          <% @sum += @x %>
+          <% @orderd_items.each do |orderd_item| %>
+          <%= order.orderd_item.quantity %>
           <% end %>
-          <!--表示するのは1つの@sumだけ-->
-          <%= @sum %>
-        </td>
+          </td>
         <td><%= order.state %></td>
         <td><%= link_to '詳細画面へ', admin_order_path(order), class: "btn btn-info" %></td>
       </tr>
