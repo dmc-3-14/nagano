@@ -64,8 +64,8 @@
                 <!--eachの数だけ@sumに足していく-->
                 <% @sum += @x %>
                 <td>
-                  <%= form_for orderd_item, :url => { action: "update" } do |f| %>
-                  <%= f.select :create_state, ['着手不可', '製作待ち', '製作中', '製作完了'] %>
+                  <%= form_for orderd_item, url: admin_orderd_item_path(orderd_item) do |f| %>
+                  <%= f.select :create_state, ['着手不可', '制作待ち', '製作中', '製作完了'] %>
                   <td><%= f.submit "更新", class:'btn btn-success' %></td>
                   <% end %>
                 </td>

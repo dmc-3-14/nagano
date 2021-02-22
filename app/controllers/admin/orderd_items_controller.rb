@@ -3,12 +3,13 @@ class Admin::OrderdItemsController < ApplicationController
   def update
     @orderd_item = OrderdItem.find(params[:id])
     @order = @orderd_item.order
-    @orderd_item.update
+    @orderd_item.update(orderd_item_params)
 
-    if @order_item.making_status == "製作中" #製作ステータスが「製作作中」なら入る
-      @order.update(order_status: 2)
-	  end
-	end
+    if @orderd_item.create_state == "製作中" #製作ステータスが「製作中」なら入る
+      @order.update(state: "製作中")
+    end
+    redirect_back(fallback_location: root_path)
+  end
 
   private
 

@@ -3,6 +3,7 @@ class Admin::OrdersController < ApplicationController
 
   def index
     @orders = Order.all
+    @orderd_items = OrderdItem.where(order_id: params[:id])
   end
 
   def show
@@ -19,9 +20,8 @@ class Admin::OrdersController < ApplicationController
 
   private
 # show.htmlにてorderd_itemの制作ステータスを更新できるようにするため、rderd_item_attributes: [:create_state] を記述しています
-# attributesの使用方法は調べてもらえると。　僕は理解できてないまま攻略本みてコード書きました
   def order_params
-    params.require(:order).permit(:state)
+    params.require(:order).permit(:state, orderd_item_attributes:[:id, :create_state])
   end
 end
 
