@@ -3,17 +3,13 @@ class Customer::OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
-    @order_item = @order.orderd_items
+    @orderd_items = OrderdItem.where(order_id: params[:id])
     @cart_items = current_customer.cart_items
-    @total_price = 0    #小計の初期値0
-    @cart_items.each do |f|
-      @total_price += f.subtotal  #小計
-    end
-    @billing_amount = @total_price + 800  #請求額
   end
 
   def index
     @orders = current_customer.orders
+    
   end
 
   def put
