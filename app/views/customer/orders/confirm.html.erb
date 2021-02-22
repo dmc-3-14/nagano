@@ -20,7 +20,7 @@
       	       <% @cart_items.each do |cart| %>
       		  <tr>
       		     <td>
-      		         <%= attachment_image_tag cart.item, :image, :fill, 60, 60, format:'jpeg', fallback: "no_image.jpg" %>
+      		         <%= attachment_image_tag cart.item, :image, :fill, 60, 60, format:'jpeg', fallback: "no_image.jpg", size:'60x60' %>
       		         <%= cart.item.title %>
       		     </td>
       		     <td>¥<%= (cart.item.non_tax_price * tax).floor %></td>
@@ -72,5 +72,5 @@
             </tr>
         </tbody>
     </table>
-    
+
     <% end %>

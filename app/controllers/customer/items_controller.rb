@@ -8,5 +8,8 @@ before_action :authenticate_customer!
 
   def index
     @items = Item.where(sale_state: "true").limit(8)
+    @item = Item.all
+    @item_page = Item.page(params[:page]).per(8)
   end
 end
+

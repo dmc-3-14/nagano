@@ -25,7 +25,7 @@ class Customer::ShippingsController < ApplicationController
   def update
     shipping = Shipping.find(params[:id])
     if shipping.update(shipping_params)
-      flash[:notice] = "You have updated user successfully."
+      flash[:notice] = "You have updated shipping successfully."
       redirect_to customers_path
     else
       render 'index'
