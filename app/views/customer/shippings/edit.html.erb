@@ -3,8 +3,8 @@
     <div class="col-sm-12 col-md-8 col-lg-1"></div>
     <h4 class="my-4"><span style="background-color:#EFEFEF">　配送先編集　</span></h4>
   </div>
-<table class="col-sm-12 col-md-8 col-lg-8 my-4">
   <%= form_for @shipping, url:"/shippings/#{@shipping.id}" do |f| %>
+  <table class="col-sm-12 col-md-8 col-lg-8 my-4">
   <tr>
     <td style="width:30%" class="pb-3">郵便番号(ハイフンなし)</td>
     <td><%= f.text_field :post_code %></td>
@@ -18,5 +18,6 @@
     <td><%= f.text_field :name %></td>
     <td><%= f.submit '変更内容を保存', class: "btn btn-success" %></td>
   </tr>
-  <% end %>
-</teble>
+  </teble>
+ <% end %>
+</div>
