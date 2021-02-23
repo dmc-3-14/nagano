@@ -49,7 +49,14 @@
     </tr>
    </table>
  </div>
+ 
  <div class="col-2 mx-auto">
+  <% if @cart_items.exists? %>
   <%= link_to '情報入力に進む', put_orders_path, class: "btn btn-success btn-block btn-md" %>
+  <% else %>
+  <h4>カート内に商品がありません。</h4>
+  <%= link_to '情報入力に進む', put_orders_path, class: "btn btn-secondary btn-block btn-md disabled" %>
+  <% end %>
+
  <div>
 </div>
