@@ -32,8 +32,12 @@ a {
   color: green
 }
 
+.flash-red {
+  color: red
+}
+
 .header-name {
-  color: #00ff00
+  color: #00ff00;
 }
 
 .top-margin {
@@ -79,7 +83,6 @@ a {
   background-size: cover;
   background-position: center;
 }
-
 
 .about-main-title {
   font-size: 64px;
@@ -158,4 +161,18 @@ a {
 
 .pagination {
   justify-content: center;
+}
+
+header {
+  height: 80px;
+  background-color: #867C72;
+}
+
+.logo a {
+  display: block;
+  width: 274px;
+  height: 65px;
+  font-size: 0;
+	background: image-url('logo.png');
+	background-size: cover;
 }

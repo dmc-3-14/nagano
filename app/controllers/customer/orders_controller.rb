@@ -1,19 +1,16 @@
 class Customer::OrdersController < ApplicationController
   before_action :authenticate_customer!
 
+
   def show
     @order = Order.find(params[:id])
-    @order_item = @order.orderd_items
+    @orderd_items = OrderdItem.where(order_id: params[:id])
     @cart_items = current_customer.cart_items
-    @total_price = 0    #小計の初期値0
-    @cart_items.each do |f|
-      @total_price += f.subtotal  #小計
-    end
-    @billing_amount = @total_price + 800  #請求額
   end
 
   def index
     @orders = current_customer.orders
+
   end
 
   def put
@@ -32,9 +29,10 @@ class Customer::OrdersController < ApplicationController
       @order.name = current_customer.last_name+current_customer.first_name
 
     elsif  params[:order][:address_method] ==  "1"
-      @order.post_code = Shipping.find(params[:order][:address_method]).post_code
-      @order.address = Shipping.find(params[:order][:address_method]).address
-      @order.name = Shipping.find(params[:order][:address_method]).name
+      shipping = Shipping.find(params[:order][:shipping_id])
+      @order.post_code = shipping.post_code
+      @order.address = shipping.address
+      @order.name = shipping.name
 
     elsif params[:order][:address] ==  "2"
       @order = Shipping.new()
@@ -63,19 +61,23 @@ class Customer::OrdersController < ApplicationController
       @order = Order.new(order_params)
       @order.customer_id = current_customer.id
       @CartItems = current_customer.cart_items
-      @order.save
-      #orderd_itemsの保存
-      current_customer.cart_items.each do |cart_item|
-        @orderd_item = OrderdItem.new
-        @orderd_item.item_id = cart_item.item_id
-        @orderd_item.quantity = cart_item.amount
-        @orderd_item.price = (cart_item.item.non_tax_price * 1.1).floor
-        @orderd_item.order_id = @order.id  #注文商品に注文idを紐付け
-        @orderd_item.save  #注文商品を保存
-      end
 
-      current_customer.cart_items.destroy_all
-      redirect_to complete_orders_path
+      if  @order.save
+        #orderd_itemsの保存
+        current_customer.cart_items.each do |cart_item|
+          @orderd_item = OrderdItem.new
+          @orderd_item.item_id = cart_item.item_id
+          @orderd_item.quantity = cart_item.amount
+          @orderd_item.price = (cart_item.item.non_tax_price * 1.1).floor
+          @orderd_item.order_id = @order.id  #注文商品に注文idを紐付け
+          @orderd_item.save  #注文商品を保存
+        end
+        current_customer.cart_items.destroy_all
+        redirect_to complete_orders_path
+      else
+        flash[:alert] = "お届け先が正しく入力されていません。お届け先の入力をお願いします。"
+        redirect_to  put_orders_path
+      end
     end
 
     private

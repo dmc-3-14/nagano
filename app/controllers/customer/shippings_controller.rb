@@ -6,7 +6,7 @@ class Customer::ShippingsController < ApplicationController
     @shipping = Shipping.new(shipping_params)
     @shipping.customer_id = current_customer.id
     if @shipping.save
-      flash[:notice] = "Genre was successfully created"
+      flash[:notice] = "Shipping was successfully created"
       redirect_to shippings_path
     else
       render 'index'
@@ -16,6 +16,7 @@ class Customer::ShippingsController < ApplicationController
   def index
     @shippings = Shipping.all
     @shipping = Shipping.new
+    @shipping.customer_id = current_customer.id
   end
 
   def edit
@@ -25,7 +26,7 @@ class Customer::ShippingsController < ApplicationController
   def update
     shipping = Shipping.find(params[:id])
     if shipping.update(shipping_params)
-      flash[:notice] = "You have updated user successfully."
+      flash[:notice] = "You have updated shipping successfully."
       redirect_to customers_path
     else
       render 'index'

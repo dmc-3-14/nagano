@@ -19,7 +19,7 @@ class Admin::OrdersController < ApplicationController
   end
 
   private
-# show.htmlにてorderd_itemの制作ステータスを更新できるようにするため、rderd_item_attributes: [:create_state] を記述しています
+  # show.htmlにてorderd_itemの制作ステータスを更新できるようにするため、rderd_item_attributes: [:create_state] を記述しています
   def order_params
     params.require(:order).permit(:state, orderd_item_attributes:[:id, :create_state])
   end
