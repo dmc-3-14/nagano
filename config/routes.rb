@@ -1,24 +1,5 @@
 Rails.application.routes.draw do
 
-  devise_for :admins, controllers: {
-    sessions:      'admins/sessions',
-    passwords:     'admins/passwords',
-    registrations: 'admins/registrations'
-  }
-  devise_for :customers, controllers: {
-    sessions:      'customers/sessions',
-    passwords:     'customers/passwords',
-    registrations: 'customers/registrations'
-  }
-
-  namespace :admin do
-    root to: 'homes#top'
-  end
-  scope module: :customer do
-    root to: 'homes#top'
-    get 'home/about' => 'homes#about'
-  end
-
   namespace :admin do
     resources :customers, only: [ :index, :show, :edit, :update]
   end
@@ -28,6 +9,7 @@ Rails.application.routes.draw do
       member do
         patch 'stateupdate'
         get 'exit'
+        put "/customers/:id/hide" => "customers#hide", as: 'customers_hide'
       end
     end
   end
@@ -45,13 +27,12 @@ Rails.application.routes.draw do
   end
 
   scope module: :customer do
-    resources :orders, only: [ :index, :show, :create] do
-      member do
+      resource :orders, except: [:show] do
         get 'put'
-        get 'confirm'
+        post 'confirm'
         get 'complete'
-     end
     end
+    resources :orders, only: [ :index, :show, :create]
   end
 
   namespace :admin do
@@ -73,5 +54,27 @@ Rails.application.routes.draw do
   scope module: :customer do
     resources :shippings, only: [:create, :destroy, :edit, :update, :index]
   end
+
+  namespace :admin do
+    root to: 'homes#top'
+  end
+
+  scope module: :customer do
+    root to: 'homes#top'
+    get 'home/about' => 'homes#about'
+  end
+
+      devise_for :admins, controllers: {
+    sessions:      'admins/sessions',
+    passwords:     'admins/passwords',
+    registrations: 'admins/registrations'
+  }
+  devise_for :customers, controllers: {
+    sessions:      'customers/sessions',
+    passwords:     'customers/passwords',
+    registrations: 'customers/registrations'
+  }
+
+
 
 end

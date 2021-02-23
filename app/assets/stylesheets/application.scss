@@ -27,6 +27,152 @@
 a {
   text-decoration: none;
 }
+
 .flash-green {
   color: green
+}
+
+.flash-red {
+  color: red
+}
+
+.header-name {
+  color: #00ff00;
+}
+
+.top-margin {
+  height: 20px;
+  width: 100%;
+}
+
+.item-box {
+  margin-right: 10px;
+}
+
+.item-box:last-child {
+  margin-right: 0px;
+}
+
+.main-visual {
+  height: 450px;
+  width: 100%;
+  background: image-url('main-visual.jpg');
+  background-size: cover;
+  display: flex;
+  align-items: center;
+}
+
+.main-visual p {
+  margin: auto;
+  padding: 30px;
+  background-color: rgba(255,255,255,0.8);
+}
+
+.new-item {
+  margin: 20px 0px;
+}
+
+// About.htmlの記述
+
+#about-main {
+  width: 100%;
+  height: 650px;
+  text-align: center;
+  color: #000000;
+  background-image: url(about_main.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+.about-main-title {
+  font-size: 64px;
+  color: #000000;
+  padding-top: 100px;
+}
+
+.abut-main-text {
+  font-size: 20px;
+  color: #000000;
+  padding-top: 20px;
+}
+
+.contact-title {
+  font-size: 32px;
+  padding-top: 90px;
+  color: #000000;
+  text-align: center;
+}
+.contact-title::after {
+  content: "";
+  display: block;
+  height: 3px;
+  width: 70px;
+  margin: 8px auto 0 auto;
+  background-color: #ec715f;
+}
+
+.contact-text {
+  font-size: 16px;
+  padding-top: 30px;
+  color: #000000;
+  text-align: center;
+}
+
+.contact-box {
+  width: 800px;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 30px 0px 90px 0px;
+  margin: 0 auto;
+}
+
+.contact-left {
+  width: 400px;
+  text-align: center;
+}
+
+.contact-left-title {
+  font-size: 20px;
+  color: #000000;
+  padding-top: 20px;
+}
+.contact-left-title:nth-child(1) {
+  padding-top: 0px;
+}
+.contact-left-text {
+  padding-top: 5px;
+  text-decoration: underline;
+}
+.contact-right {
+  width: 400px;
+  margin: 0 auto;
+  text-align: center;
+}
+.contact-right-title {
+  font-size: 20px;
+  color: #000000;
+}
+.contact-right .fab {
+  font-size: 50px;
+  margin-left: 20px;
+  color: #000000;
+}
+// About.htmlの記述ここまで
+
+.pagination {
+  justify-content: center;
+}
+
+header {
+  height: 80px;
+  background-color: #867C72;
+}
+
+.logo a {
+  display: block;
+  width: 274px;
+  height: 65px;
+  font-size: 0;
+	background: image-url('logo.png');
+	background-size: cover;
 }

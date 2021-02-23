@@ -1,2 +1,39 @@
-<h1>Admin::Orders#index</h1>
-<p>Find me in app/views/admin/orders/index.html.erb</p>
+<h1>注文履歴一覧</h1>
+<div class="container m-5">
+  <div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-2"></div>
+    <h4 class="my-4 "><span style="background-color:#EFEFEF">　注文履歴一覧　</span></h4>
+  </div>
+  <table class="table col-7 mx-auto">
+    <thead class="thead-light">
+      <tr>
+        <th>購入日時</th>
+        <th>購入者</th>
+        <th>注文個数</th>
+        <th>注文ステータス</th>
+        <th>注文詳細</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @orders.each do |order| %>
+      <tr>
+        <td><%= order.customer.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+        <td><%= order.name %></td>
+        <td>
+          <% @sum = 0 %>
+          <% order.orderd_items.each do |orderd_item| %>
+          <!--１つの商品の数量を計算-->
+          <% @x = orderd_item.quantity %>
+          <!--eachの数だけ@sumに足していく-->
+          <% @sum += @x %>
+          <% end %>
+          <!--表示するのは1つの@sumの中身-->
+          <%= @sum %>
+        </td>
+        <td><%= order.state %></td>
+        <td><%= link_to '詳細画面へ', admin_order_path(order), class: "btn btn-info" %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<div>

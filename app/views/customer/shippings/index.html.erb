@@ -1,2 +1,73 @@
-<h1>Customer::Shippings#index</h1>
-<p>Find me in app/views/customer/shippings/index.html.erb</p>
+<div class="container m-5">
+  <div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-1"></div>
+    <h4 class="my-4"><span style="background-color:#EFEFEF">　配送先登録 / 一覧　</span></h4>
+  </div>
+
+<%= form_for @shipping, :url => {action:"create"} do |f| %>
+  <table class="col-sm-12 col-md-8 col-lg-8 my-4">
+  <tbody>
+      <tr>
+        <td style="width:30%" class="pb-3">郵便番号(ハイフンなし)</td>
+        <td class="pb-3"><%= f.text_field :post_code %></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="pb-3">住所</td>
+        <td class="pb-3" colspan="2"><%= f.text_field :address %></td>
+      </tr>
+      <tr>
+        <td class="pb-3">宛名</td>
+        <td class="pb-3"><%= f.text_field :name %></td>
+        <td class="pb-3"><%= f.submit '新規登録', class: "btn btn-success" %></td>
+      </tr>
+    </tbody>
+  </teble>
+<% end %>
+
+<table class="table table-bordered table-sm col-8">
+  <thead class="table-light">
+    <tr>
+      <th>郵便番号</th>
+      <th>住所</th>
+      <th>宛名</th>
+      <th>　</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @shippings.each do |shipping| %>
+    <tr>
+      <td style="width:10%"><%= shipping.post_code %></td>
+      <td><%= shipping.address %></td>
+      <td><%= shipping.name %></td>
+      <td style="width:35%"><%= link_to "編集する", edit_shipping_path(shipping.id), class: "btn btn-success mx-3" %><%= link_to "削除する", "/shippings/#{shipping.id}", method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %></td>
+
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+
+<!--注文情報入力画面で新しいお届け先を選択した場合　現状表示のみ　編集削除は困難な気がする-->
+<table class="table table-bordered table-sm col-8">
+  <thead class="table-light">
+    <tr>
+      <th>郵便番号</th>
+      <th>住所</th>
+      <th>宛名</th>
+      <th>　</th>
+    </tr>
+  </thead>
+  <tbody>
+
+
+  <% @shipping.customer.orders.each do |order| %>
+    <tr>
+      <td><%= order.post_code %></td>
+      <td><%= order.address %></td>
+      <td><%= order.name %></td>
+    </tr>
+     <% end %>
+   </tbody>
+  </table>
+
