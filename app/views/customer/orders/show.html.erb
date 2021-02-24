@@ -46,6 +46,7 @@
           <td><%= orderd_item.item.title %></td>
           <td><%= orderd_item.price.to_s(:delimited) %></td>
           <td><%= orderd_item.quantity %></td>
+          <!--小計@xと商品合計の計算-->
          <!--１つの商品の価格×数量を計算-->
           <% @x = orderd_item.price * orderd_item.quantity %>
             <!--eachの数だけ@sumに足していく-->
@@ -67,8 +68,7 @@
         </tr>
         <tr>
           <td class="table-active"><strong>ご請求額</strong></td>
-          <% @total = @sum +800 %>
-          <td><%= @total.to_s(:delimited) %></td>
+          <td><%= @order.billing_amount.to_s(:delimited) %></td>
         </tr>
     </table>
   </div>

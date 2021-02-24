@@ -52,13 +52,14 @@
             <% @orderd_items.each do |orderd_item| %>
               <tr>
                 <td><%= orderd_item.item.title %></td>
-                <td><%= orderd_item.item.non_tax_price.to_s(:delimited) %></td>
+                <td><%= orderd_item.price.to_s(:delimited) %></td>
                 <td><%= orderd_item.quantity %></td>
-                <td><%= orderd_item.price %></td>
+                <!--小計@xと商品合計@sumの計算-->
                 <!--１つの商品の価格×数量を計算-->
                 <% @x = orderd_item.price * orderd_item.quantity %>
                 <!--eachの数だけ@sumに足していく-->
                 <% @sum += @x %>
+                <td><%= @x.to_s(:delimited) %></td>
                 <td>
                   <%= form_for orderd_item, url: admin_orderd_item_path(orderd_item) do |f| %>
                   <%= f.select :create_state, ['着手不可', '制作待ち', '制作中', '制作完了'] %>
@@ -80,8 +81,7 @@
         </tr>
         <tr>
           <th>請求合計金額</th>
-          <% @total = @sum +800 %>
-          <th><%= @total.to_s(:delimited) %></th>
+          <th><%= @order.billing_amount.to_s(:delimited) %></th>
         </tr>
       </table>
     </div>
