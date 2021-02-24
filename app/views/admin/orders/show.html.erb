@@ -1,12 +1,12 @@
-<div class="container">
+<div class="container m-5">
   <div class="row">
-
-    <h1>注文履歴詳細</h1>
+    <div class="col-1"></div>
+    <h4 class="my-4"><span style="background-color:#EFEFEF">　注文履歴詳細　</span></h4>
+  </div>
       <table class=table>
         <tr>
           <th>購入者</th>
           <th><%= @order.customer.last_name + @order.customer.first_name %></th>
-        </tr>
         <tr>
           <th>注文日</th>
           <th><%= @order.created_at %></th>
@@ -34,7 +34,7 @@
         </tr>
       </table>
 
-
+    <div class="row">
       <table class="table col-7">
         <thead class="thead-light">
           <tr>
@@ -43,24 +43,23 @@
             <th>数量</th>
             <th>小計</th>
             <th>制作ステータス</th>
+            <th></th>
           </tr>
         </thead>
-
         <tbody>
             <!--商品中間テーブルのカラムを呼び出してます-->
             <% @sum = 0 %>
             <% @orderd_items.each do |orderd_item| %>
               <tr>
                 <td><%= orderd_item.item.title %></td>
-                <td><%= orderd_item.item.non_tax_price.to_s(:delimited) %></td>
+                <td><%= orderd_item.price.to_s(:delimited) %></td>
                 <td><%= orderd_item.quantity %></td>
-                <td><%= orderd_item.price %></td>
-
+                <!--小計@xと商品合計@sumの計算-->
                 <!--１つの商品の価格×数量を計算-->
                 <% @x = orderd_item.price * orderd_item.quantity %>
-
                 <!--eachの数だけ@sumに足していく-->
                 <% @sum += @x %>
+                <td><%= @x.to_s(:delimited) %></td>
                 <td>
                   <%= form_for orderd_item, url: admin_orderd_item_path(orderd_item) do |f| %>
                   <%= f.select :create_state, ['着手不可', '制作待ち', '制作中', '制作完了'] %>
@@ -71,9 +70,7 @@
             <% end %>
           </tbody>
         </table>
-      </div>
-
-      <table class="col-3">
+      <table class="col-3  align-self-end offset-1">
         <tr>
           <th>商品合計</th>
           <th><%= @sum.to_s(:delimited) %></th>
@@ -84,11 +81,10 @@
         </tr>
         <tr>
           <th>請求合計金額</th>
-          <% @total = @sum +800 %>
-          <th><%= @total.to_s(:delimited) %></th>
+          <th><%= @order.billing_amount.to_s(:delimited) %></th>
         </tr>
-
       </table>
+    </div>
     </div>
   </div>
 
