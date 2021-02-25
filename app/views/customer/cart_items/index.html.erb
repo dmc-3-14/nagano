@@ -31,7 +31,7 @@
       <% end %>
     </td>
     <td class="align-middle"><%= (cart.item.non_tax_price * cart.amount * tax).floor %></td>
-    <td class="align-middle"><%= link_to 'Destroy', cart_item_path(cart), method: :delete, class: "btn btn-danger btn-xs" %></td>
+    <td class="align-middle"><%= link_to 'Destroy', cart_item_path(cart), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger btn-xs" %></td>
    </tr>
    <tbody>
     <% @sum += (cart.item.non_tax_price * cart.amount * tax).floor %>
@@ -49,7 +49,7 @@
     </tr>
    </table>
  </div>
- 
+
  <div class="col-2 mx-auto">
   <% if @cart_items.exists? %>
   <%= link_to '情報入力に進む', put_orders_path, class: "btn btn-success btn-block btn-md" %>
